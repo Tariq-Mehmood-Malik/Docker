@@ -100,7 +100,6 @@ Following are steps to install Docker-Desktop on any debian based linux system.
 3. Download latest version of [Deocker-Desktop.deb](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 4. Open terminal in directory where Docker-desktop.deb package is downloaded and run following command.
    ```bash
-   sudo apt-get update
    sudo apt-get install ./docker-desktop-amd64.deb
    ```
 5. Open Docker-Desktop through GUI or through following command:
