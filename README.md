@@ -91,9 +91,9 @@ Now log out and back log in (or restart system) for the changes to take effect.
 Following are steps to install Docker-Desktop on any debian based linux system.
 1. (i) If you are installing `Docker-Desktop` on system having [Gnome](https://www.gnome.org/) Desktop enviroment you must also install [AppIndicator and KStatusNotifierItem](https://extensions.gnome.org/extension/615/appindicator-support/).                   
    (ii) If you are installing gnome on Debian based system having Desktop enviroment other than Gnome `gnome-terminal` must be installed:
-  ```bash
-  sudo apt install gnome-terminal
-  ```
+    ```bash
+    sudo apt install gnome-terminal
+    ```
 ![Gnome-Terminal](images/7.jpg)   
 
 2. Set up Docker's apt repository. See step 1 to 3 on [Docker Engine Installation](#docker-engine-installation) section.
