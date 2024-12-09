@@ -4,7 +4,8 @@ Docker is a platform that simplifies the development, delivery, and operation of
 
 ## Key Concepts
 
-- **Docker Images**: These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
+- **Docker Images**:
+- These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
 - **Docker Containers**: These are live instances of images. They run in their own isolated environment, sharing the host’s core system, but remaining lightweight and portable.
 - **Dockerfile**: A Dockerfile is a text file with a series of commands for creating an image.
 - **Docker Volumes**: Used for storing data that you need to keep, even if the container restarts or deleted.
