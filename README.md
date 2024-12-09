@@ -31,12 +31,12 @@ Docker is a platform that simplifies the development, delivery, and operation of
 - `docker pull`: Download an image from a registry.
 
 # Docker Installation
-Following are steps to install docker engine on linux (Ubuntu) OS.
+Following are steps to install docker engine on Ubuntu linux.
 1. Update system `apt` source:
 ```bash
 sudo apt update
 ```
-![Updating apt]()
+![Updating apt](images/1.jpg)   
 
 2. Add Docker's official GPG key
 ```bash
@@ -45,7 +45,7 @@ sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 ```
-![Adding Docker's Official GPG key]()
+![Adding Docker's Official GPG key](images/2.jpg)   
 
 3. Add the repository to `apt` sources
 ```bash
@@ -55,30 +55,23 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 ```
-![Adding docker repository to system apt]()
-If you are getting error try these instead
-```bash
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-```
+![Adding docker repository to system apt](images/3.jpg)   
+
 4. Install docker engine (complete) with following command
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
-![Installing Docker]()
+```   
+![Installing Docker](images/4.jpg)   
 5. Verify that the installation by running `hello-world` image:
 ```bash
 sudo docker run hello-world
 ```
-![Running hello-world docker]()
+![Running hello-world docker](images/5.jpg)   
 6. (Optional) Add user to `docker` group to run Docker commands without needing to use sudo everytime.
 ```bash
 sudo usermod -aG docker  <user-name>
 ```
-![Adding user to docker group]()
+![Adding user to docker group](images/6.jpg)   
 Now log out and back log in (or restart system) for the changes to take effect.
 
 
