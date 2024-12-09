@@ -1,6 +1,6 @@
 # Docker
 ---
-# Table of Contents
+## Table of Contents
 
 - [What is Docker](#what-is-docker)
 - [Docker Engine Installation](#docker-engine-installation)
