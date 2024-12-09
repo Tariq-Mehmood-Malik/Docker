@@ -4,8 +4,7 @@ Docker is a platform that simplifies the development, delivery, and operation of
 
 ## Key Concepts
 
-- **Docker Images**:
-- These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
+- **Docker Images**: These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
 - **Docker Containers**: These are live instances of images. They run in their own isolated environment, sharing the host’s core system, but remaining lightweight and portable.
 - **Dockerfile**: A Dockerfile is a text file with a series of commands for creating an image.
 - **Docker Volumes**: Used for storing data that you need to keep, even if the container restarts or deleted.
@@ -32,4 +31,36 @@ Docker is a platform that simplifies the development, delivery, and operation of
 - `docker pull`: Download an image from a registry.
 
 # Installation of Docker
-In order to install docker 
+Following are steps to install docker engine on linux (debian) OS.
+1. Update system `apt` source:
+```bash
+sudo apt update
+```
+2. Add Docker's official GPG key
+```bash
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
+3. Add the repository to `apt` sources
+```bash
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+If you are getting error try these instead
+```bash
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+4. Install docker engine (complete) with following command
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
