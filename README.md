@@ -1,8 +1,16 @@
 # Docker
+---
+# Table of Contents
 
+- [What is Docker](#what-is-docker)
+- [Docker Engine Installation](#docker-engine-installation)
+- [Docker Desktop Installation](#docker-desktop-installation)
+- [Building a website on Nginx](#building-a-website-on-nginx)
+---
+# What is Docker
 Docker is a platform that simplifies the development, delivery, and operation of applications by using containers. It allows you to bundle an application with everything it needs, such as libraries and dependencies, into a single container. This container can then be run on any system that supports Docker, without needing to change the host system.
 
-## Key Terms
+## Docker Key Terms
 
 - **Docker Images**: These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
 - **Docker Containers**: These are live instances of images. They run in their own isolated environment, sharing the host’s core system, but remaining lightweight and portable.
@@ -80,17 +88,25 @@ Now log out and back log in (or restart system) for the changes to take effect.
 
 ---
 # Docker Desktop Installation
-Following are steps to install Docker-Desktop on any linux OS.
-1. (i) If you are installing `Docker-Desktop` on Debian based system having [Gnome](https://www.gnome.org/) Desktop enviroment you must also install [AppIndicator and KStatusNotifierItem](https://extensions.gnome.org/extension/615/appindicator-support/).    
+Following are steps to install Docker-Desktop on any debian based linux system.
+1. (i) If you are installing `Docker-Desktop` on system having [Gnome](https://www.gnome.org/) Desktop enviroment you must also install [AppIndicator and KStatusNotifierItem](https://extensions.gnome.org/extension/615/appindicator-support/).                   
    (ii) If you are installing gnome on Debian based system having Desktop enviroment other than Gnome `gnome-terminal` must be installed:
   ```bash
   sudo apt install gnome-terminal
   ```
 ![Gnome-Terminal](images/7.jpg)   
 
-2. Set up Docker's apt repository. See step 1 to 3 [Docker Engine Installation](#docker-engine-installation)
-
-[](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64)
+2. Set up Docker's apt repository. See step 1 to 3 on [Docker Engine Installation](#docker-engine-installation) section.
+3. Download latest version of [Deocker-Desktop.deb](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+4. Open terminal in directory where Docker-desktop.deb package is downloaded and run following command.
+   ```bash
+   sudo apt-get update
+   sudo apt-get install ./docker-desktop-amd64.deb
+   ```
+5. Open Docker-Desktop through GUI or through following command:
+   ```bash
+   systemctl --user start docker-desktop
+   ```
 
 
 
