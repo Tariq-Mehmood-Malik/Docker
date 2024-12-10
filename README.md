@@ -10,23 +10,53 @@
 # What is Docker
 Docker is a platform that simplifies the development, delivery, and operation of applications by using containers. It allows you to bundle an application with everything it needs, such as libraries and dependencies, into a single container. This container can then be run on any system that supports Docker, without needing to change the host system.
 
-## Docker Key Terms
+### Docker Key Terms
 
-- **Docker Images**: These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
-- **Docker Containers**: These are live instances of images. They run in their own isolated environment, sharing the host’s core system, but remaining lightweight and portable.
-- **Dockerfile**: A Dockerfile is a text file with a series of commands for creating an image.
-- **Docker Volumes**: Used for storing data that you need to keep, even if the container restarts or deleted.
-- **Docker Engine**: The core component that runs and manages Docker containers, consisting of the Docker daemon, REST API, and the Docker CLI.
-- **Docker Client**: The command-line interface (CLI) or graphical user interface (GUI) that allows users to interact with Docker, sending commands to the Docker daemon.
-- **Docker Daemon**: The background process that manages Docker containers, images, networks, and volumes, and listens for Docker API requests.
-- **Docker Host**: The physical or virtual machine running Docker Engine that hosts and runs Docker containers.
-- **Docker Registry**: A service or repository for storing and distributing Docker images, such as Docker Hub, where you can pull or push images.
-- **Docker Compose**: A tool for defining and running multi-container Docker applications using a YAML file, enabling the orchestration of services.
-- **Docker Network**: A virtual network that allows containers to communicate with each other and the outside world in a secure and isolated manner.
-- **Docker Ports**: These allow containers to communicate with the host machine or other containers by opening specific channels.
-- **Docker Swarm**: Docker’s native clustering and orchestration tool for managing a cluster of Docker nodes (hosts) and deploying multi-container applications.
-- **Docker Hub**: A cloud-based registry service for storing and sharing Docker images, where both official and user-contributed images are available.
-- **Docker Stack**: A collection of services (containers) defined by a Compose file that can be deployed to a Docker Swarm cluster for easy scaling and management.
+1. **Docker Images**:     
+   These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
+2. **Docker Containers**:    
+3. These are live instances of images. They run in their own isolated environment, sharing the host’s core system, but remaining lightweight and portable.
+3. **Dockerfile**:
+   A Dockerfile is a text file with a series of commands for creating an image.
+4. **Docker Volumes**:
+    Used for storing data that you need to keep, even if the container restarts or deleted.
+5. **Docker Engine**:
+   The core component that runs and manages Docker containers, consisting of the Docker daemon, REST API, and the Docker CLI.
+   
+## Docker Architecture
+In Docker's architecture, the Client, Host, and Registry are key components:
+
+![Docker Architecture](images/d1.jpg)  
+
+1. **Client**:
+   The Docker client is the interface through which users interact with Docker. It can be a command-line interface (CLI) or a graphical user interface (GUI). The client sends requests to the Docker daemon (server) via REST API to build, run, and manage containers. It can be on the same machine as the Docker daemon or on a remote system.
+
+2. **Host**:
+   The Docker host is the machine (physical or virtual) that runs the Docker daemon.It is responsible for building, running, and managing containers. The Docker daemon listens for API requests from the Docker client and communicates with other components, like the registry, to fetch or store images.
+
+3. **Registry**:
+   A registry is a storage system for Docker images. Docker Hub is the default public registry, but private registries can also be used. The registry stores Docker images, which are used to create containers. The Docker client can pull images from the registry or push images to it.
+
+## Docker Container Lifecycle
+Docker containers complete life cycle are managed by Docker-Daemon by Runc, Shim, and Containerd.
+![Docker Life](images/d2.jpg)  
+
+1. **Docke-Daemon** (`dockerd`):
+   It is the central server that manages Docker containers. It listens for Docker API requests (from the Docker CLI) and coordinates the container lifecycle. It interacts with `containerd` to manage container creation, execution, and destruction.
+
+2. **containerd**:
+   It is a high-level container runtime responsible for pulling images, creating container, and managing containers. It communicates with `runc` to start containers and `shim` to maintain their lifecycle.
+
+3. **runc**:
+   It is a low-level container runtime that sets up the container’s namespaces, cgroups, and other Linux features to ensure process isolation and resource management. It runs the actual container’s process.
+
+4. **shim**:
+   It is a lightweight tool that ensures the container’s main process stays running, even after the Docker CLI disconnects. It manages logging and other metadata while working with `containerd` and `runc`.
+
+### Workflow:
+`Docker CLI` sends a command to the `Docker Daemon`. The `Daemon` communicates with `containerd` to manage the container lifecycle. `containerd` pulls the container image and invokes `runc` to set up and run the container. `shim` keeps the container’s process running and ensures logging and metadata are handled. `containerd` and `shim` continue to manage the container life until it's stopped/killed.
+
+
 
 ## Basic Docker Commands
 
