@@ -15,12 +15,12 @@ Spin up an HTTPD container listening on port 5000 of the host insure the contain
   ```bash
   docker pull httpd
   ```      
-![01](images/h1.jpg)         
+![01](images/h1.jpg)         <br><br><br>
 2. Building container of name `my-http` in detached mode from image `httpd` and hosting it on port `5000` and enabling autostart/ restart as always.
   ```bash
   docker run -d --name my-http -p 5000:80 --restart always httpd
   ```       
-![02](images/h2.jpg)     
+![02](images/h2.jpg)     <br><br><br>
 
 3. Opening container `my-http` interactive shell as bash and moving to location where default `index.html` is presenet.
   ```bash
@@ -28,11 +28,11 @@ Spin up an HTTPD container listening on port 5000 of the host insure the contain
   cd htdocs/
   ls
   ```              
-![03](images/h3.jpg)     
+![03](images/h3.jpg)     <br><br><br>
 4. Modefying `index.html` content and exiting from container bash shell.
   ```bash
   echo "<html><body><h1>Hello from httpd in docker</h1></body></html>" > index.html
   ```             
-![04](images/h4.jpg)     
+![04](images/h4.jpg)     <br><br><br>
 5. Verifying chages made in `index.html` through browser `http://192.168.0.120:5000`.             
-![05](images/h5.jpg)     
+![05](images/h5.jpg)     <br><br><br>
