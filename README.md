@@ -26,7 +26,7 @@ Docker is a platform that simplifies the development, delivery, and operation of
 ## Docker Architecture
 In Docker's architecture, the Client, Host, and Registry are key components:
 
-![Docker Architecture](images/d1.jpg)  
+![Docker Architecture](images/01.webp)  
 
 1. **Client**:          
    The Docker client is the interface through which users interact with Docker. It can be a command-line interface (CLI) or a graphical user interface (GUI). The client sends requests to the Docker daemon (server) via REST API to build, run, and manage containers. It can be on the same machine as the Docker daemon or on a remote system.
@@ -39,7 +39,7 @@ In Docker's architecture, the Client, Host, and Registry are key components:
 
 ## Docker Container Lifecycle
 Docker containers complete life cycle are managed by Docker daemon, Runc, Shim, and Containerd.                  
-![Docker Life](images/d2.jpg)  
+![Docker Life](images/02.webp)  
 
 1. **Docke-Daemon** (`dockerd`):          
    It is the central server that manages Docker containers. It listens for Docker API requests (from the Docker CLI) and coordinates the container lifecycle. It interacts with `containerd` to manage container creation, execution, and destruction.
