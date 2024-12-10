@@ -54,8 +54,7 @@ Docker containers complete life cycle are managed by Docker daemon, Runc, Shim, 
    It is a lightweight tool that ensures the container’s main process stays running, even after the Docker CLI disconnects. It manages logging and other metadata while working with `containerd` and `runc`.
 
 ### Workflow:      
-`Docker CLI` sends a command to the `Docker Daemon`. The `Daemon` communicates with `containerd` to manage the container lifecycle. `containerd` pulls the container image and invokes `runc` to set up and run the container. `shim` keeps the container’s process running and ensures logging and metadata are handled. `containerd` and `shim` continue to manage the container life until it's stopped/killed.
-
+Docker CLI sends a command to the Docker Daemon. The Daemon communicates with containerd to manage the container lifecycle. containerd pulls the container image and invokes runc to set up and run the container. shim keeps the container’s process running and ensures logging and metadata are handled. containerd and shim continue to manage the container life until it's stopped/killed.
 
 
 ## Basic Docker Commands
