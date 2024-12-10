@@ -24,7 +24,7 @@ Docker is a platform that simplifies the development, delivery, and operation of
    The core component that runs and manages Docker containers, consisting of the Docker daemon, REST API, and the Docker CLI.
    
 ## Docker Architecture
-In Docker's architecture, the Client, Host, and Registry are key components:
+In Docker's architecture, the Client, Host, and Registry are key components:<br><br><br>
 
 ![Docker Architecture](images/01.webp)  <br><br><br>
 
