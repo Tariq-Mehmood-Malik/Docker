@@ -26,7 +26,7 @@ Docker is a platform that simplifies the development, delivery, and operation of
 ## Docker Architecture
 In Docker's architecture, the Client, Host, and Registry are key components:
 
-![Docker Architecture](images/01.webp)  
+![Docker Architecture](images/01.webp)  <br><br><br>
 
 1. **Client**:          
    The Docker client is the interface through which users interact with Docker. It can be a command-line interface (CLI) or a graphical user interface (GUI). The client sends requests to the Docker daemon (server) via REST API to build, run, and manage containers. It can be on the same machine as the Docker daemon or on a remote system.
@@ -39,7 +39,7 @@ In Docker's architecture, the Client, Host, and Registry are key components:
 
 ## Docker Container Lifecycle
 Docker containers complete life cycle are managed by Docker daemon, Runc, Shim, and Containerd.                  
-![Docker Life](images/02.webp)  
+![Docker Life](images/02.webp)  <br><br><br>
 
 1. **Docke-Daemon** (`dockerd`):          
    It is the central server that manages Docker containers. It listens for Docker API requests (from the Docker CLI) and coordinates the container lifecycle. It interacts with `containerd` to manage container creation, execution, and destruction.
@@ -74,7 +74,7 @@ Following are steps to install docker engine on Ubuntu linux.
 ```bash
 sudo apt update
 ```
-![Updating apt](images/1.jpg)   
+![Updating apt](images/1.jpg)   <br><br><br>
 
 2. Add Docker's official GPG key
 ```bash
@@ -83,7 +83,7 @@ sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 ```               
-![Adding Docker's Official GPG key](images/2.jpg)   
+![Adding Docker's Official GPG key](images/2.jpg)   <br><br><br>
 
 3. Add the repository to `apt` sources
 ```bash
@@ -93,26 +93,26 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 ```
-![Adding docker repository to system apt](images/3.jpg)   
+![Adding docker repository to system apt](images/3.jpg)   <br><br><br>
 
 4. Install docker engine (complete) with following command
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
-![Installing Docker](images/4.jpg)   
+![Installing Docker](images/4.jpg)   <br><br><br>
 
                  
 5. Verify that the installation by running `hello-world` image:
 ```bash
 sudo docker run hello-world
 ```
-![Running hello-world docker](images/5.jpg)    
+![Running hello-world docker](images/5.jpg)    <br><br><br>
        
 6. (Optional) Add user to `docker` group to run Docker commands without needing to use sudo everytime.
 ```bash
 sudo usermod -aG docker  <user-name>
 ```
-![Adding user to docker group](images/6.jpg)   
+![Adding user to docker group](images/6.jpg)   <br><br><br>
 Now log out and back log in (or restart system) for the changes to take effect.
 
 ---
@@ -123,7 +123,7 @@ Following are steps to install Docker-Desktop on any debian based linux system.
     ```bash
     sudo apt install gnome-terminal
     ```      
-![Gnome-Terminal](images/s1.jpg)   
+![Gnome-Terminal](images/s1.jpg)   <br><br><br>
 
 2. Set up Docker's apt repository. See step 1 to 3 on [Docker Engine Installation](#docker-engine-installation) section.
 3. Download latest version of [Deocker-Desktop.deb](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
@@ -131,12 +131,12 @@ Following are steps to install Docker-Desktop on any debian based linux system.
    ```bash
    sudo apt-get install ./docker-desktop-amd64.deb
    ```        
-![Install-Desktop](images/s2.jpg)   
+![Install-Desktop](images/s2.jpg)   <br><br><br>
 5. Open Docker-Desktop through GUI or through following command:
    ```bash
    systemctl --user start docker-desktop
    ```      
-![Install-Desktop](images/s3.png)
+![Install-Desktop](images/s3.png)        <br><br><br>
 
 ---
 # Building a website on Nginx
@@ -160,13 +160,13 @@ Following are steps to install Docker-Desktop on any debian based linux system.
   ```bash
   docker pull ngix
   ```
-![01](images/d1.jpg)         
+![01](images/d1.jpg)         <br><br><br>
 2. Building the container from image on port 8000 with custom `index.html`.
   ```bash
   docker run -p 8000:80 -v /home/ansible/nginx:/usr/share/nginx/html -d nginx
   ```
-![02](images/d2.jpg)     
+![02](images/d2.jpg)     <br><br><br>
 3. Verying website by entering `localhost:8000` in browser.         
-![03](images/d3.jpg)     
+![03](images/d3.jpg)     <br><br><br>
 
 
