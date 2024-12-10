@@ -122,19 +122,21 @@ Following are steps to install Docker-Desktop on any debian based linux system.
    (ii) If you are installing gnome on Debian based system having Desktop enviroment other than Gnome `gnome-terminal` must be installed:
     ```bash
     sudo apt install gnome-terminal
-    ```
-![Gnome-Terminal](images/7.jpg)   
+    ```      
+![Gnome-Terminal](images/s1.jpg)   
 
 2. Set up Docker's apt repository. See step 1 to 3 on [Docker Engine Installation](#docker-engine-installation) section.
 3. Download latest version of [Deocker-Desktop.deb](https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 4. Open terminal in directory where Docker-desktop.deb package is downloaded and run following command.
    ```bash
    sudo apt-get install ./docker-desktop-amd64.deb
-   ```
+   ```        
+![Install-Desktop](images/s2.jpg)   
 5. Open Docker-Desktop through GUI or through following command:
    ```bash
    systemctl --user start docker-desktop
-   ```
+   ```      
+![Install-Desktop](images/s2.png)
 
 
 
