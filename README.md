@@ -5,7 +5,7 @@
 - [What is Docker](#what-is-docker)
 - [Docker Engine Installation](#docker-engine-installation)
 - [Docker Desktop Installation](#docker-desktop-installation)
-- [Building a website on Nginx](#building-a-website-on-nginx)
+- [Building a website on Nginx](#nginx.md)
 ---
 # What is Docker
 Docker is a platform that simplifies the development, delivery, and operation of applications by using containers. It allows you to bundle an application with everything it needs, such as libraries and dependencies, into a single container. This container can then be run on any system that supports Docker, without needing to change the host system.
@@ -136,7 +136,6 @@ Following are steps to install Docker-Desktop on any debian based linux system.
    ```bash
    systemctl --user start docker-desktop
    ```      
-![Install-Desktop](images/s2.png)
-
+![Install-Desktop](images/s3.png)
 
 
