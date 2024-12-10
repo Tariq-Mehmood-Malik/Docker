@@ -5,7 +5,7 @@
 - [What is Docker](#what-is-docker)
 - [Docker Engine Installation](#docker-engine-installation)
 - [Docker Desktop Installation](#docker-desktop-installation)
-- [Building a website on Nginx](nginx.md)
+- [Building a website on Nginx](#building-a-website-on-nginx)
 ---
 # What is Docker
 Docker is a platform that simplifies the development, delivery, and operation of applications by using containers. It allows you to bundle an application with everything it needs, such as libraries and dependencies, into a single container. This container can then be run on any system that supports Docker, without needing to change the host system.
@@ -32,7 +32,7 @@ In Docker's architecture, the Client, Host, and Registry are key components:
    The Docker client is the interface through which users interact with Docker. It can be a command-line interface (CLI) or a graphical user interface (GUI). The client sends requests to the Docker daemon (server) via REST API to build, run, and manage containers. It can be on the same machine as the Docker daemon or on a remote system.
 
 2. **Host**:         
-   The Docker host is the machine (physical or virtual) that runs the Docker daemon.It is responsible for building, running, and managing containers. The Docker daemon listens for API requests from the Docker client and communicates with other components, like the registry, to fetch or store images.
+   The Docker host is the machine (physical or virtual) that runs the Docker daemon.It is responsible for building, running, and managing containers.   
 
 3. **Registry**:             
    A registry is a storage system for Docker images. Docker Hub is the default public registry, but private registries can also be used. The registry stores Docker images, which are used to create containers. The Docker client can pull images from the registry or push images to it.
@@ -137,5 +137,36 @@ Following are steps to install Docker-Desktop on any debian based linux system.
    systemctl --user start docker-desktop
    ```      
 ![Install-Desktop](images/s3.png)
+
+---
+# Building a website on Nginx
+
+1. Making custom `index.html` for website.
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Simple Page</title>
+  </head>
+  <body>
+      <h1>Welcome to My Website</h1>
+      <p>This is a simple HTML page.</p>
+  </body>
+  </html>
+  ```
+2. Pulling nginx latest image fron Docker Hub.
+  ```bash
+  docker pull ngix
+  ```
+![01](images/d1.jpg)         
+2. Building the container from image on port 8000 with custom `index.html`.
+  ```bash
+  docker run -p 8000:80 -v /home/ansible/nginx:/usr/share/nginx/html -d nginx
+  ```
+![02](images/d2.jpg)     
+3. Verying website by entering `localhost:8000` in browser.         
+![03](images/d3.jpg)     
 
 
