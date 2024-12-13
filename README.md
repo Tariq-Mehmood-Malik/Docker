@@ -15,11 +15,11 @@ Docker is a platform that simplifies the development, delivery, and operation of
 1. **Docker Images**:     
    These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
 2. **Docker Containers**:    
-3. These are live instances of images. They run in their own isolated environment, sharing the host’s core system, but remaining lightweight and portable.
+   These are live instances of images. They run in their own isolated environment, sharing the host’s core system, but remaining lightweight and portable.
 3. **Dockerfile**:             
    A Dockerfile is a text file with a series of commands for creating an image.
 4. **Docker Volumes**:           
-    Used for storing data that you need to keep, even if the container restarts or deleted.
+   Used for storing data that you need to keep, even if the container restarts or deleted.
 5. **Docker Engine**:           
    The core component that runs and manages Docker containers, consisting of the Docker daemon, REST API, and the Docker CLI.
    
