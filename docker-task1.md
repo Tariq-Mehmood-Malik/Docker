@@ -58,6 +58,34 @@ Create an image of a webpage of your choice.You may upload it to Docker Hub.
 
 ## Task 2
 Create 2 networks of Bridge Type named as `n01` and `w02`. Make two different containers, each in one of the networks.
+- Craeting bridge network named `n01`:
+  ```bash
+  docker network create --driver bridge n01
+  docker network ls
+  ```
+  ![21](images/21.png)
+  
+- Creating container with `n01` network
+  ```bash
+  docker run -d --name linux-n01 --net n01 alpine:latest
+  docker ps -a
+  ```
+  ![23](images/23.png)
+  
+- Craeting bridge network named `w01`:
+  ```bash
+  docker network create --driver bridge w01
+  docker network ls
+  ```    
+  ![22](images/22.png)
+  
+- Creating container with `w01` network
+  ```bash
+  docker run -d -it --name pyth-w01 --net w01 python:slim
+  docker ps
+  ```
+  ![24](images/24.png)
+  
 
 ---
 
