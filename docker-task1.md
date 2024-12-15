@@ -51,7 +51,7 @@ Create an image of a webpage of your choice.You may upload it to Docker Hub.
   ```
   ![04](04.png)
 
-- verifying from Docker-Hub.
+- verifying from Docker-Hub.        
   ![05](05.png)
   
 ---
