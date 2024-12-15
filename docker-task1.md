@@ -153,11 +153,8 @@ Create a file named `Dockerfile` for a modified CentOS (using the official CentO
   docker images  
   ```
 
-  ![51](images/51.png)
 
-- Creating container
-  ```bash
-  docker run -dit --name my-os my-centos1
-  ```
-  
-![52](images/52.png)
+  Was't able to perform this task as i was getting following error while building image, i have tried multiple things but wasn't able to resolve it will try againg tomorrow. 
+
+  ![52](images/52.png)
+
