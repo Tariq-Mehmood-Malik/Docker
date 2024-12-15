@@ -145,7 +145,7 @@ Create a file named `Dockerfile` for a modified CentOS (using the official CentO
 - Creating `Dockerfile` for task with following content.
   ```html
   FROM centos:latest
-  RUN yum -y update && yum install -y figlet && yum isntall -y iputils-ping && yum install -y curl && yum install -y htop 
+  RUN dnf -y update && dnf install -y figlet && dnf isntall -y iputils-ping && dnf install -y curl && dnf install -y htop 
   ```
 - Building and veryfying image
   ```bash
@@ -156,5 +156,5 @@ Create a file named `Dockerfile` for a modified CentOS (using the official CentO
 
   Was't able to perform this task as i was getting following error while building image, i have tried multiple things but wasn't able to resolve it will try againg tomorrow. 
 
-  ![52](images/52.png)
+  ![51](images/51.png)
 
