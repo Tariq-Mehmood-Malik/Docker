@@ -95,7 +95,7 @@ Using the image from `engineerbaz/dockerlabs`, create a container to show output
 - Pulling image from `engineerbaz/dockerlabs` and making conatiner name `baz-linux`
   ```bahs
   docker pull engineerbaz/dockerlabs:v1
-  docker run -dit --name baz-linux engineerbaz/dockerlabs:v1
+  docker run -dit --name baz-linux -p 8080:80 engineerbaz/dockerlabs:v1
   docker ps
   ```
   ![31](images/31.png)
