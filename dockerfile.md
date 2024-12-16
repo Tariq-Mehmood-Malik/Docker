@@ -33,7 +33,7 @@ A `Dockerfile` is a text file that contains a series of instructions used to bui
   ```
 - **`CMD`**: Defines the default command to run when a container starts.
   ```dockerfile
-  CMD ["python3", "app.py"]
+  CMD ["nginx", "-g", "daemon off;"]    # run app in foreground
   ```
 - **`ENTRYPOINT`**: Defines the executable that always run when a container starts, It can be overridden with `CMD`. If both `ENTRYPOINT` and `CMD` are used, `CMD's` values are passed as arguments to `ENTRYPOINT`.
   ```dockerfile
