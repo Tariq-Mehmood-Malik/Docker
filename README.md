@@ -13,7 +13,7 @@ Docker is a platform that simplifies the development, delivery, and operation of
 ### Docker Key Terms
 
 1. **Docker Images**:     
-   These are like blueprints for containers, containing everything the container needs, including the operating system, libraries, and application code. You create images using a Dockerfile, and they can be shared or reused.
+   A `Docker image` is a lightweight, standalone, and executable package that contains everything needed to run a piece of software. It includes the application code, libraries, dependencies, environment variables, configuration files, and more, all bundled into a single image.
 2. **Docker Containers**:    
    These are live instances of images. They run in their own isolated environment, sharing the host’s core system, but remaining lightweight and portable.
 3. **Dockerfile**:             
