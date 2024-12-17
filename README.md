@@ -32,35 +32,37 @@ Docker uses a client-server architecture. The Docker client talks to the Docker 
 
 ![Docker Architecture](images/01.webp)  <br><br><br>
 
-1. **Client**:          
+**Docker Engine**:        
+   The Docker Engine is the heart of the Docker platform. It comprises two main components which are `Docker Client(CLI)` and `Docker Daemon`.
+   
+**Docker Client**:          
    The Docker client is the interface through which users interact with Docker. It can be a command-line interface (CLI) or a graphical user interface (GUI). The client sends requests to the Docker daemon (server) via REST API to build, run, and manage containers. It can be on the same machine as the Docker daemon or on a remote system.              
    The REST API specifies how the applications can interact with the Server, and instruct it to get their job done.
 
-3. **Host**:         
-   The Docker host is the machine (physical or virtual) that runs the Docker daemon.It is responsible for building, running, and managing containers.   
+**Host**:         
+   The Docker host is the machine (physical or virtual) that runs the Docker daemon.It is responsible for building, running, and managing containers.
 
-4. **Registry**:             
+**Registry**:             
    A registry is a storage system for Docker images. Docker Hub is the default public registry, but private registries can also be used. The registry stores Docker images, which are used to create containers. The Docker client can pull images from the registry or push images to it.
 
 ## Docker Container Lifecycle
-Docker containers complete life cycle are managed by Docker Engine.
-
+Docker containers complete life cycle are managed by Docker Daemon.
 
 ![Docker Life](images/02.webp)  <br><br><br>
 
-1. **Docke-Daemon** (`dockerd`):          
+**Docke-Daemon** (`dockerd`):          
    It is the central server that manages Docker containers. It listens for Docker API requests (from the Docker CLI) and coordinates the container lifecycle. It interacts with `containerd` to manage container creation, execution, and destruction.
 
-2. **containerd**:            
+**containerd**:            
    It is a high-level container runtime responsible for pulling images, creating container, and managing containers. It communicates with `runc` to start containers and `shim` to maintain their lifecycle.
 
-3. **runc**:          
+**runc**:          
    It is a low-level container runtime that sets up the container’s namespaces, cgroups, and other Linux features to ensure process isolation and resource management. It runs the actual container’s process.
 
-4. **shim**:             
+**shim**:             
    It is a lightweight tool that ensures the container’s main process stays running, even after the Docker CLI disconnects. It manages logging and other metadata while working with `containerd` and `runc`.
 
-### Workflow:      
+### Docker Engine Workflow:      
 Docker CLI sends a command to the Docker Daemon. The Daemon communicates with containerd to manage the container lifecycle. containerd pulls the container image and invokes runc to set up and run the container. shim keeps the container’s process running and ensures logging and metadata are handled. containerd and shim continue to manage the container life until it's stopped/killed.
 
 
