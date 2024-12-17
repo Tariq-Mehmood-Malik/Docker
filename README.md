@@ -8,8 +8,12 @@
 - [Building a website on Nginx](#building-a-website-on-nginx)
 ---
 # What is Docker
-Docker is a platform that simplifies the development, delivery, and operation of applications by using containers. It allows you to bundle an application with everything it needs, such as libraries and dependencies, into a single container. This container can then be run on any system that supports Docker, without needing to change the host system.
+Docker is a software platform that simplifies the process of building, running, managing and distributing applications. It allows you to bundle an application with everything it needs, such as libraries and dependencies, into a single container. This container can then be run on any system that supports Docker, without needing to change the host system. The machine on which Docker is installed and running is usually referred to as a Docker Host or Host. <br>     
+Docker containers are often described as "lightweight" because they don't have a full operating system running inside them. Instead, they share the host operating system's kernel but isolate/ virtualize their processes, file systems, and network interfaces in such a way that it feels as if they are running in their own environment. Whereas the kernel of the host’s operating system is shared across all containers.
 
+#### Important Note
+`Linux containers` can run on Linux, macOS (via Docker Desktop), and Windows (via WSL2).           
+`Windows containers` run only on Windows hosts, using Windows-based images
 ### Docker Key Terms
 
 1. **Docker Images**:     
@@ -24,21 +28,24 @@ Docker is a platform that simplifies the development, delivery, and operation of
    The core component that runs and manages Docker containers, consisting of the Docker daemon, REST API, and the Docker CLI.
    
 ## Docker Architecture
-In Docker's architecture, the Client, Host, and Registry are key components:<br><br><br>
+Docker uses a client-server architecture. The Docker client talks to the Docker daemon, Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon. <br>
 
 ![Docker Architecture](images/01.webp)  <br><br><br>
 
 1. **Client**:          
-   The Docker client is the interface through which users interact with Docker. It can be a command-line interface (CLI) or a graphical user interface (GUI). The client sends requests to the Docker daemon (server) via REST API to build, run, and manage containers. It can be on the same machine as the Docker daemon or on a remote system.
+   The Docker client is the interface through which users interact with Docker. It can be a command-line interface (CLI) or a graphical user interface (GUI). The client sends requests to the Docker daemon (server) via REST API to build, run, and manage containers. It can be on the same machine as the Docker daemon or on a remote system.              
+   The REST API specifies how the applications can interact with the Server, and instruct it to get their job done.
 
-2. **Host**:         
+3. **Host**:         
    The Docker host is the machine (physical or virtual) that runs the Docker daemon.It is responsible for building, running, and managing containers.   
 
-3. **Registry**:             
+4. **Registry**:             
    A registry is a storage system for Docker images. Docker Hub is the default public registry, but private registries can also be used. The registry stores Docker images, which are used to create containers. The Docker client can pull images from the registry or push images to it.
 
 ## Docker Container Lifecycle
-Docker containers complete life cycle are managed by Docker daemon, Runc, Shim, and Containerd.                  
+Docker containers complete life cycle are managed by Docker Engine.
+
+
 ![Docker Life](images/02.webp)  <br><br><br>
 
 1. **Docke-Daemon** (`dockerd`):          
