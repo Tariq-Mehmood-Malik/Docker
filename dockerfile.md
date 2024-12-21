@@ -117,7 +117,20 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
 ```
 
 
+# Building Image from Dockerfile
+To build a Docker image from a Dockerfile, follow these simple steps:
 
+1. Create a Dockerfile with your requirments.
+
+2. Open a terminal and navigate to the directory where your Dockerfile is located.
+
+3. Run the build command:      
+```bash
+docker build -t <image_name>:<tag> .
+```
+* `<image_name>` is the name you want for your image.
+* `<tag>` is an optional version or label. If you don't provide it, it defaults to latest.
+* The `.` refers to the current directory where the Dockerfile is. You can also provide location to your `Dockerfile`.
 
 
 
