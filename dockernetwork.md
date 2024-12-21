@@ -1,95 +1,83 @@
-# Docker Network / Networking
+# Docker Networking Overview
+---
+The beauty of docker container is isolation not only on process / services level also on network level as well. Docker allows communication between containers and with external networks. It utilizes software-defined networking (SDN) to create virtual networks, providing connectivity while maintaining isolation. This allows users to define custom networks, connect containers to these networks, and establish network policies.         
+ 
+Basic network /driver types in docker:
+
+### 1. Bridge: 
+The default network type. It creates a virtual bridge on the host machine, connecting containers to the bridge. Containers on a bridge network can communicate with each other and, by default, access the host's network.        
+
+### 2. Host: 
+Containers on the host network share the host's network namespace. They have the same IP address as the host and can directly access the host's network interfaces.    
+
+### 3. None:
+This network type disables the container's network stack, isolating it from any network access.   
+
+### 4. Overlay: 
+This network type allows communication between containers running on different Docker hosts. It creates a virtual network that spans multiple hosts, enabling inter-host container communication.  
+
+### Docker connect 
+It is a command used to add an existing Docker container to a specific network (on same host). By connecting a container to a an other network, it gains the ability to communicate with other containers within that network.
+
+---
+Some important concepts:
+
+**Veth (Virtual Ethernet) Pair:**             
+  A veth (Virtual Ethernet) pair is a set of two virtual network interfaces. One end resides inside a container's network namespace. The other end is typically connected to the host’s network namespace or a bridge (docker0).
+  
+**Linux Namespaces:**   
+  A namespace in Linux is a feature that isolates system resources such as processes, network interfaces, file systems, and more, allowing them to operate independently within separate environments. Each namespace provides an isolated view of a specific resource, ensuring that processes in different namespaces do not interfere with each other. This isolation is crucial for containerization technologies like Docker, where each containers can have their own independent resources (e.g., network, filesystem, process IDs) while running on the same host system.   
+  
+**NAT (Network Address Translation):**    
+  NAT is used to allow devices to access external networks (like the internet). When a container tries to access an external service (such as a website), the host will perform source NAT (SNAT) to translate the container’s private IP address to the host’s public or routable IP address. The reverse process, called DNAT (Destination NAT), happens when the response returns to the host and is forwarded to the container
+  
+**Bridge network:**    
+  A bridge network in Linux connects multiple network interfaces (like Ethernet or virtual interfaces) to allow them to communicate as if they were on the same physical network. It operates at the data link layer (Layer 2) and is commonly used in virtualization to connect virtual machines to the host network. A bridge works like a software switch, forwarding packets based on MAC addresses. In docker `docker0` is default bridge network for containers.
+
+---
+# Docker Networking Expalined
+
+## Host Driver in Docker
+The Host network driver in Docker is a networking mode that allows containers to directly use the networking stack of the Docker host machine. When a container is run with the Host network driver, it bypasses Docker’s network abstraction layer and gains direct access to the host’s network interfaces, routing table, and ports. This means that the container shares the same network namespace as the host, using the host’s IP address and network configuration.
+
+If you use the host network mode for a container, that container's network stack isn't isolated from the Docker host (the container shares the host's networking namespace), and the container doesn't get its own IP-address allocated. For instance, if you run a container which binds to port 80 and you use host networking, the container's application is available on port 80 on the host's IP address.
+
+### Pros of Host Driver in Docker:
+- `Better performance`: Reduced overhead and faster networking.
+- `Simplicity`: No need for port mapping and unified network configuration.
+- `Direct resource access`: Containers can use host resources like storage and hardware.
+- `Less complexity`: Avoids virtual network overhead.
+    
+### Cons of Host Driver in Docker:
+- `Security risks`: Lack of isolation between containers and host.
+- `Port conflicts`: Containers directly share the host’s network, leading to potential port issues.
+- `Limited scalability`: Harder to scale across multiple hosts.
+- `Resource contention`: Containers may compete with host resources.
+- `Less portability`: Tied to the host’s environment, making it harder to move between systems.
+
+
+## Bridge Driver in Docker   
+
+Docker's Bridge driver uses several key concepts to manage container networking and enable communication both within the container environment and with external networks. The main components involved are `Veth pairs`, `Linux namespaces`, `NAT`, and the `Bridge network`.
+
+
+**1. Veth (Virtual Ethernet) Pair**    
+One end of the veth pair resides within the container's `network namespace` and acts as the container’s primary network interface (e.g., `eth0`). The other end is connected to the Docker `bridge network` (`docker0`), which allows the container to communicate with other containers and the host. The veth pair serves as a `virtual cable` connecting the isolated container network to the host’s network stack.
+
+**2. Linux Namespaces**    
+Each container has its own `network namespace`, which includes its own IP address, routing table, and network interfaces. This isolation ensures that containers do not interfere with each other’s network configurations, maintaining a secure and independent networking environment. The container’s network namespace is connected to the host's network via the Docker bridge (`docker0`) and its veth pair.
+
+**3. NAT (Network Address Translation)**    
+When a container sends outbound traffic (e.g., to access the internet), Docker performs `SNAT`. This translates the container’s private IP to the host’s public IP. `Destination NAT (DNAT)` is performed when a response comes back to the host, DNAT maps the response to the appropriate container by converting the public IP back to the container’s private IP address.
+
+This ensures that the container can access external services while remaining secure behind the host's IP address.
+
+**4. Bridge Network**    
+The `bridge network` in Docker connects containers to the host’s network, allowing them to communicate both with each other and with the outside world. The bridge operates at the `data link layer` (Layer 2), forwarding packets based on `MAC addresses`. Containers on the same bridge network can communicate directly with each other by sending packets to the bridge. The bridge also connects to the host’s network interface, enabling containers to access external resources via NAT.
+
 ---
 
-The beauty of docker container is isolation not only on process / services level also on network level as well. By default docker creates `veth` for each container (virtual ethernet interface) that is seprate from host which is mostly `172.17.0.0/16` all containers are created in this network unless defined by Docker Client. All containers in veth netwotk can communicate with each others and also with host system as well.      
-The veth is linked to the host's `docker0` bridge interface creating veth pair. The `docker0` bridge is the default virtual bridge network created by Docker when it starts. It acts as a central point for containers to communicate with each other and the host system (Like Router at home).
+## **Summary**
 
+The veth pair connects the container’s isolated network namespace to the host's bridge, allowing communication with the host and other containers. Each container operates in its own network namespace, isolating its network configuration from the host and other containers. Docker uses **SNAT** for outbound traffic and **DNAT** for inbound traffic, allowing containers to communicate with external networks using the host’s IP address. The Docker bridge network connects containers to each other and the host, facilitating inter-container communication and providing access to the outside world.
 
-**Network Address Translation (NAT)**               
-NAT is used to allow containers to access external networks (like the internet) even though they are on a private, isolated network (e.g., 172.17.0.0/16). When a container tries to access an external service (such as a website), the host will perform source NAT (SNAT) to translate the container’s private IP address to the host’s public or routable IP address. The reverse process, called DNAT (Destination NAT), happens when the response returns to the host and is forwarded to the container.
-Docker configures iptables rules on the host to implement NAT. 
-
-
-A **veth pair** (short for **virtual Ethernet pair**) is a pair of virtual network interfaces that are connected to each other. You can think of it like a **virtual cable** that connects two "places" on a computer's network. 
-
-Here's an easy-to-understand breakdown of how it works:
-
-### Think of It Like a Tunnel
-
-Imagine you have two rooms in a building, and there’s a **tunnel** that connects the two rooms. In the world of computers, these "rooms" are called **network namespaces** (which are like separate network environments). The **tunnel** is the **veth pair**.
-
-- One end of the tunnel is inside a **container** (which has its own virtual room, or network namespace).
-- The other end of the tunnel is on the **host machine** (your main computer that runs Docker, for example).
-
-### How It Works
-
-1. **Container Side**: 
-   - The container has a network interface, like `eth0`, that is connected to one end of the veth pair. This gives the container access to the network, but only through the veth interface.
-   
-2. **Host Side**: 
-   - The other end of the veth pair connects to the host’s network (like the `docker0` bridge in Docker). This means the container can send and receive network traffic through the host.
-
-### Key Points:
-
-- **Communication**: The two ends of the veth pair can send and receive data between each other. If data (like a network request) is sent through one end of the veth pair, it automatically comes out of the other end.
-- **Virtual Cable**: It's like a **virtual cable** because there's no physical wire involved; it's all handled by software.
-- **Isolation**: Each container gets its own side of the veth pair, making sure the container's network traffic is isolated from other containers unless configured otherwise.
-
-### Example:
-- When a **Docker container** is started, Docker automatically creates a veth pair. The container’s network interface (like `eth0`) is connected to one side of the veth pair. The other side is connected to the `docker0` bridge on the host machine. This allows the container to communicate with the host and even with other containers.
-
-### Summary:
-A **veth pair** is just a way to connect two network environments (like a container and the host) so they can communicate with each other. It acts like a virtual wire between the container and the host, letting them send data back and forth.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Network Types Inside Container
-
-
-
-
-## The Flow of Communication:
-### Container to Host Communication:         
-When a container wants to communicate with the host, the container sends packets through its veth interface to docker0. Since docker0 is connected to the host network, the host receives the packets and routes them appropriately.
-
-### Container to External Network (via NAT):     
-If a container wants to access the external network (e.g., the internet), it sends packets to its veth interface, which forwards them to the docker0 bridge on the host. The host applies NAT to the packet. The source IP of the container (e.g., 172.17.0.2) is replaced with the host's IP address. The packet is then sent out from the host's network interface (such as eth0 or wlan0) to the external network.
-
-
-### Return Traffic (from External Network):    
-When the external network (e.g., a website) sends a response back to the host, the host uses its DNAT rules to forward the response to the correct container. It looks up the original source IP and port, then forwards it to the appropriate container via the veth pair.
-Container-to-Container Communication:
-
-Containers connected to the same bridge (docker0) can communicate with each other using their internal IPs (e.g., 172.17.0.x addresses).
-This communication does not require NAT, as both containers are in the same private network.
-Detailed Example of Docker's Networking Flow:
-Setting up the Veth Pair: When a container is launched, Docker creates a veth pair. For example, the container might get the eth0 interface with the IP 172.17.0.2 in its network namespace. On the host side, a corresponding interface like vethX (e.g., veth6c2fd9) is created, which is connected to the docker0 bridge.
-
-Communication to Host: If the container wants to communicate with the host (say, ping the host's docker0 IP 172.17.0.1), it sends the packet through its veth interface. The packet is passed to docker0 and then forwarded to the host’s network stack.
-
-Container to External Network:
-
-When the container wants to access an external website, it sends a packet with a destination IP (e.g., 8.8.8.8 for Google's DNS) to the docker0 bridge.
-Docker’s iptables rules will ensure that the container's IP (172.17.0.2) is replaced with the host's IP address in the outgoing packet, and this is done via NAT (masquerading).
-The host then routes the packet to the external network.
-Return Traffic:
-
-When the external website responds, the response is sent to the host's public IP. Docker's iptables DNAT rules will identify the response and forward it to the correct container's IP (172.17.0.2).
