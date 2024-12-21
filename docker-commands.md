@@ -33,6 +33,15 @@ docker run -d -v volume-name:/path/to/conatiner --name my-container nginx      #
 ```
 <br>
 
+To create & run container `nginx` latest version. `-v` attach custom volume to conatiner with read only access:
+```bash
+docker run -d -v /host/path:/container/path:ro nginx     # for Bind mount
+
+docker run -d -v my-volume:/data:ro nginx      # for Named volume
+```
+<br>
+
+
 To list all conatiners running
 ```bash
 docker ps
@@ -161,21 +170,21 @@ docker network connect <new-network-name> <container-name>
 ```
 <br>
 
-To create named volume in docker
+To create named  in docker
 ```bash
-docker volume create my_volume
+docker  create my_
 ```
 <br>
 
-To list all named volume in docker
+To list all named  in docker
 ```bash
-docker volume ls
+docker  ls
 ```
 <br>
 
-To inspect named volume
+To inspect named 
 ```bash
-docker volume inspect my_volume
+docker  inspect my_
 ```
 <br>
 
