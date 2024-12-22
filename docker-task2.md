@@ -8,10 +8,17 @@
 ```bash
 git clone https://github.com/dockersamples/example-voting-app.git
 ```
+
 ![0101](images/01-01.png)
 
 <br>
 - Building infrastructure with docker compose (with file with images only).       
+
+```bash
+docker compose -f docker-compose.images.yml up -d
+docker ps              # Checking container started
+docker network ls      # Checking new networks
+```
 
 ![0102](images/01-02.png)
 
@@ -27,6 +34,10 @@ git clone https://github.com/dockersamples/example-voting-app.git
 
 <br>
 - Shutting down infrastructure.
+
+```bash
+docker compose -f docker-compose.images.yml down
+```
 
 ![0105](images/01-05.png)
 
