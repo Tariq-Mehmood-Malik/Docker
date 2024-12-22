@@ -54,7 +54,7 @@ ping:
   command: /bin/bash -c "apt-get update && apt-get install -y iputils-ping && ping 8.8.8.8"
 ```
 
-#### b. A WebServer of Apache on port 8081 using [vote.html at github  engineerbaz/DevOps-Bootcamp-2024}  
+#### b. A WebServer of Apache on port 8081 using [vote.html at github  engineerbaz/DevOps-Bootcamp-2024}         
 ```yaml
 vote:
   image: httpd
@@ -63,9 +63,9 @@ vote:
   volumes:
     - ./vote/index.html:/usr/local/apache2/htdocs/index.html  
 ```
-
-- Vote index.html
-```html
+       
+- Vote index.html        
+```html 
 <html>
   <body>
 
@@ -87,31 +87,6 @@ db:
 ```
 
 #### d. Webserver of your image built locally printing current time/date and your name      
-
-- Creating Dockerfile for image name `date`
-```dockerfile
-FROM nginx
-
-COPY ./date/index.html /usr/share/nginx/html/index.html
-
-EXPOSE 80
-```
-
-- Creating local image name `date`
-```bash
-docker build -t date .
-```
-
-![0209](images/02-09.png)
-
-<br>
-- Docker-Compose Code for my local image
-```yaml
-  date:
-    image: date
-    ports:
-      - "8082:80"
-```
 
 - My index.html for date, time & Owner name.
 ```html
@@ -165,8 +140,36 @@ docker build -t date .
 
 </body>
 </html>
-
 ``` 
+
+- Creating Dockerfile for image name `date`              
+
+```dockerfile
+FROM nginx
+
+COPY ./date/index.html /usr/share/nginx/html/index.html
+
+EXPOSE 80
+```
+
+- Creating local image name `date`
+
+```bash
+docker build -t date .
+```
+
+![0209](images/02-09.png)
+
+<br>
+- Docker-Compose Code for my local image
+
+```yaml
+  date:
+    image: date
+    ports:
+      - "8082:80"
+```
+
 
 ### Complete Docker-compose file
 ```yaml
