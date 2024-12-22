@@ -87,13 +87,30 @@ db:
 ```
 
 #### d. Webserver of your image built locally printing current time/date and your name      
+
+- Creating Dockerfile for image name `date`
+```dockerfile
+FROM nginx
+
+COPY ./date/index.html /usr/share/nginx/html/index.html
+
+EXPOSE 80
+```
+
+- Creating local image name `date`
+```bash
+docker build -t date .
+```
+
+![0209](images/02-09.png)
+
+<br>
+- Docker-Compose Code for my local image
 ```yaml
-date:
-  image: nginx
-  ports:
-    - 8082:80
-  volumes:
-    - ./date/index.html:/usr/share/nginx/html/index.html
+  date:
+    image: date
+    ports:
+      - "8082:80"
 ```
 
 - My index.html for date, time & Owner name.
@@ -175,11 +192,9 @@ services:
       - MYSQL_ROOT_PASSWORD=pass
 
   date:
-    image: nginx
+    image: date
     ports:
       - "8082:80"
-    volumes:
-      - ./date/index.html:/usr/share/nginx/html/index.html
 ```
 
 ### Results
