@@ -160,7 +160,7 @@ docker build -t date .
 
 ![0209](images/02-09.png)
 
-<br>
+<br><br>
 - Docker-Compose Code for my local image
 
 ```yaml
@@ -206,28 +206,32 @@ services:
   
 ![0203](images/02-03.png)
 
-<br>
+<br><br>
 - Vote App on port 8081.
   
 ![0204](images/02-04.png)
 
-<br>
+<br><br>
 
 - Date, Time & Owner name App on port 8082.
   
 ![0205](images/02-05.png)
 
-<br>
+<br><br>
 - Ubuntu Ping machine.
+
+```bash
+docker logs 02-ping-1
+```
   
 ![0206](images/02-06.png)
 
-<br>
+<br><br>
 - Logging as root in mysql data base.
   
 ![0207](images/02-07.png)
 
-<br>
+<br><br>
 - Removing infrastructure.
   
 ![0208](images/02-08.png)
