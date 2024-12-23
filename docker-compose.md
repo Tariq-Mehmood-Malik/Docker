@@ -16,34 +16,25 @@ For example, assume you're building a project with NodeJS and MongoDB together. 
 ### Key Benefits of Docker Compose
 
 1. **New Network**  
-   Docker Compose automatically creates a new network for that infrastructure, ensuring isolated communication between them.
+   Docker Compose automatically creates a new network for that infrastructure, ensuring isolated communication from other container/ ifrrastructures.
 
-2. **Set Prefix for All Resources**  
+2. **Unique Resource Names**  
    By default, Docker Compose sets a prefix for all resources (containers, networks, volumes) based on the project directory name, making it easier to manage and identify resources specific to a project.
 
 3. **Multi-Container Management**  
    Easily define and run multi-container Docker applications with a single configuration file (`docker-compose.yml`).
 
-4. **Simplified Configuration**  
-   Allows you to configure and link multiple services (e.g., databases, web servers) with a single command.
-
-5. **Consistency**  
+4. **Consistency**  
    Ensures that the environment is consistent across all stages (development, testing, production).
 
-6. **Automation**  
+5. **Automation**  
    Automates container deployment, scaling, and orchestration tasks.
 
-7. **Isolation**  
+6. **Isolation**  
    Each service runs in its container, providing isolation while allowing them to communicate seamlessly.
 
-8. **Easy Setup and Scaling**  
+7. **Easy Setup and Scaling**  
    Easily start, stop, and scale up/down services with simple commands (`docker-compose up`, `docker-compose down`).
-
-9. **New Network**  
-   Docker Compose automatically creates a new network for that infrastructure, ensuring isolated communication between them.
-
-10. **Set Prefix for All Resources**  
-   By default, Docker Compose sets a prefix for all resources (containers, networks, volumes) based on the project directory name, making it easier to manage and identify resources specific to a project.
 
 
 ### Docker Compose YAML   
@@ -86,15 +77,15 @@ Let's discuss the above code and understand it piece by piece:
 
 `services`: defines the services that we need to run   
 
-`app`: is a custom name for one of your containers   
+`app`: is a custom name for one of our service      
 
 `image`: the image which we have to pull. Here we are using node:latest and mongo.   
 
-`container_name`: is the name for each container   
+`container_name`: is the name for each container, if not defined will take service name  
 
 `restart`: starts/restarts a service container   
 
-`ports`: defines the custom port to run the container   
+`ports`: defines the custom ports to run the container   
 
 `working_dir` is the current working directory for the service container   
 
@@ -102,13 +93,42 @@ Let's discuss the above code and understand it piece by piece:
 
 `command` is the command to run the service   
 
+<br>
 ### How to run the multi-container    
-We need to build our multi-container using docker build.
 
-docker compose build
-After successfully building, we can run the containers using the up command.
+After creating compose file we can built & run our infrastructure with single command.
 
-docker compose up
-If you want to run the container in detached mode, just use the -d flag.
+To build but not start infrastructure.
+```bash
+docker compose build 
+```
 
+To run already build services, if not availabe than created images.
+```bash
+docker compose up 
+```
+
+If you want to run the container in detached mode, just use the -d flag.    
+```bash
 docker compose up -d
+```
+
+To Stop infrastructure.
+```bash
+docker compose stop 
+```
+
+To start Stoped or already build services.
+```bash
+docker compose start 
+```
+
+To forcefully stop all running containers.
+```bash
+docker compose kill
+```
+
+To Stop & remove all services.
+```bash
+docker compose down
+```
