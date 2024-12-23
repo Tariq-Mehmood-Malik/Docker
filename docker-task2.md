@@ -192,7 +192,7 @@ services:
     ports:
       - "5050:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_ROOT_PASSWORD: pass
 
   date:
     image: date
