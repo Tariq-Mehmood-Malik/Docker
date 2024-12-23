@@ -57,8 +57,11 @@ services:
     environment:
       MYSQL_HOST: localhost
       MYSQL_USER: root
-      MYSQL_PASSWORD: 
+      MYSQL_PASSWORD: pass
       MYSQL_DB: test
+    depends_on:
+      - mongo
+
   mongo:
     image: mongo
     container_name: app_mongo
@@ -66,9 +69,10 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ~/mongo:/data/db
+      - my_volume:/data/db
+
 volumes:
-  mongodb:
+  my_volume:
 ```
 
 Let's discuss the above code and understand it piece by piece:
@@ -87,11 +91,17 @@ Let's discuss the above code and understand it piece by piece:
 
 `ports`: defines the custom ports to run the container   
 
-`working_dir` is the current working directory for the service container   
+`working_dir`: is the current working directory for the service container   
 
-`environment` defines the environment variables, such as DB credentials, and so on.   
+`environment`: defines the environment variables, such as DB credentials, and so on.   
 
-`command` is the command to run the service   
+`command`: is the command to run the service  
+
+`volumes`: to attached named volume or bind mount with container.
+
+`my_volume`: named volume created by docker.
+
+`depends_on`: This ensures that app starts only after mongo is initialized
 
 <br>
 ### How to run the multi-container    
