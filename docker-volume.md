@@ -30,3 +30,40 @@ You can mount a **tmpfs** in a Docker container using the `--tmpfs` flag:
 docker run -d --tmpfs /tmp:rw,size=100m my_container
 ```
 `--tmpfs /tmp:rw,size=100m`: Mounts a `tmpfs` filesystem at the `/tmp` directory inside the container, with read-write (`rw`) permissions and a maximum size of 100 MB.
+
+## Docker Volume Commands
+
+To create named volume in docker
+```bash
+docker volume create my_volume
+```
+<br>
+
+To list all named  in docker
+```bash
+docker volume ls
+```
+<br>
+
+To inspect named volume
+```bash
+docker volume inspect my_volume
+```
+<br>
+
+To create & run container `nginx` latest version. `-v` attach custom volume to conatiner:
+```bash
+docker run -d -v /path/to/host:/path/to/conatiner --name my-container nginx     # for Bind mount
+
+docker run -d -v volume-name:/path/to/conatiner --name my-container nginx      # for Named volume
+```
+<br>
+
+To create & run container `nginx` latest version. `-v` attach custom volume to conatiner with read only access:
+```bash
+docker run -d -v /host/path:/container/path:ro nginx     # for Bind mount
+
+docker run -d -v my-volume:/data:ro nginx      # for Named volume
+```
+<br>
+
