@@ -81,3 +81,36 @@ The `bridge network` in Docker connects containers to the host’s network, allo
 
 The veth pair connects the container’s isolated network namespace to the host's bridge, allowing communication with the host and other containers. Each container operates in its own network namespace, isolating its network configuration from the host and other containers. Docker uses **SNAT** for outbound traffic and **DNAT** for inbound traffic, allowing containers to communicate with external networks using the host’s IP address. The Docker bridge network connects containers to each other and the host, facilitating inter-container communication and providing access to the outside world.
 
+---
+
+## Docker Network Commands
+
+To list all docker networks
+```bash
+docker network ls
+```
+<br>
+
+To create new network of driver bridge
+```bash
+docker network create --driver bridge <netwrok-name>
+```
+<br>
+
+To inspect network
+```bash
+docker network inspect <network-name>
+```
+<br>
+
+To create conatiner in custom network
+```bash
+docker run -d --net <network-name> nginx
+```
+<br>
+
+To connect container running in 1 network to an other network also
+```bash
+docker network connect <new-network-name> <container-name>
+```
+<br>
