@@ -188,4 +188,45 @@ docker volume inspect my_volume
 ```
 <br>
 
+### Docker-Compose Commands
 
+To build but not start infrastructure.
+```bash
+docker compose build 
+```
+<br>
+
+To run already build services, if not availabe than created images.
+```bash
+docker compose up 
+```
+<br>
+
+If you want to run the container in detached mode, just use the -d flag.    
+```bash
+docker compose up -d
+```
+<br>
+
+To Stop infrastructure.
+```bash
+docker compose stop 
+```
+<br>
+
+To start Stoped or already build services.
+```bash
+docker compose start 
+```
+<br>
+
+To forcefully stop all running containers.
+```bash
+docker compose kill
+```
+<br>
+
+To Stop & remove all services.
+```bash
+docker compose down
+```
