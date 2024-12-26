@@ -59,7 +59,8 @@ If you use the host network mode for a container, that container's network stack
 - `Resource contention`: Containers may compete with host resources.
 - `Less portability`: Tied to the host’s environment, making it harder to move between systems.
 
-<br>
+<br>   
+
 ## Bridge Driver in Docker   
 
 Docker's Bridge driver uses several key concepts to manage container networking and enable communication both within the container environment and with external networks. The main components involved are `Veth pairs`, `Linux namespaces`, `NAT`, and the `Bridge network`.
