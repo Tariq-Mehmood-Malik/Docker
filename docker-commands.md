@@ -170,21 +170,21 @@ docker network connect <new-network-name> <container-name>
 ```
 <br>
 
-To create named  in docker
+To create named volume in docker
 ```bash
-docker  create my_
+docker volume create my_volume
 ```
 <br>
 
 To list all named  in docker
 ```bash
-docker  ls
+docker volume ls
 ```
 <br>
 
-To inspect named 
+To inspect named volume
 ```bash
-docker  inspect my_
+docker volume inspect my_volume
 ```
 <br>
 
