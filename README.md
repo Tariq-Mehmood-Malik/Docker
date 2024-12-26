@@ -74,14 +74,60 @@ Docker CLI sends a command to the Docker Daemon. The Daemon communicates with co
 
 ## Basic Docker Commands
 
-- `docker run`: Start a new container from an image.
-- `docker ps`: View a list of containers that are currently running.
-- `docker stop`: Stop a running container.
-- `docker rm`: Delete a stopped container.
-- `docker build`: Create a new image from a Dockerfile.
-- `docker push`: Upload an image to a registry (like Docker Hub).
-- `docker pull`: Download an image from a registry.
+To pull image from Docker-Hub to local host
+```bash
+docker pull nginx:latest
+```
+<br>
 
+To create container `nginx` latest version, after pulling image from Docker-Hub (if not locally present), with name tag `my-container` but not start it :
+```bash
+docker create --name my-container nginx
+docker start my-container        # to start container if created before
+```
+<br>
+
+To create & run container `nginx` latest version. `-d` run in detach mode (foreground):   
+```bash 
+docker run -d --name my-container nginx
+```
+<br>
+
+To create & run container `nginx` latest version. `-it` provide interactive `TTY` of container after creating it:
+```bash
+docker run -itd --name my-container nginx
+```
+<br>
+
+To create & run container `nginx` latest version. `-p` port map 80 to 8080 port of host:
+```bash
+docker run -d -p 8080:80 --name my-container nginx
+```
+<br>
+
+To list all conatiners running
+```bash
+docker ps
+
+docker container ls
+```
+<br>
+
+To list all local images
+```bash
+docker images
+
+docker image ls
+```
+<br>
+
+To list all containers running & stoped.
+```bash
+docker ps -a
+
+docker container ls -a
+```
+<br>
 ---
 # Docker Engine Installation
 Following are steps to install docker engine on Ubuntu linux.
