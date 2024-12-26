@@ -1,5 +1,5 @@
 # Docker Networking Overview
----
+
 The beauty of docker container is isolation not only on process / services level also on network level as well. Docker allows communication between containers and with external networks. It utilizes software-defined networking (SDN) to create virtual networks, providing connectivity while maintaining isolation. This allows users to define custom networks, connect containers to these networks, and establish network policies.         
  
 Basic network /driver types in docker:
