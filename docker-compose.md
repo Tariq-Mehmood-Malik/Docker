@@ -11,7 +11,7 @@ To overcome this, Docker introduced a concept called Docker Compose.
 ## Docker Compose   
 
 Docker Compose is a tool you can use to define and share multi-container applications. This means you can run a project with multiple containers using a single source.   
-For example, assume you're building a project with NodeJS and MongoDB together. You can create a single `docker-ompose.yaml` file that starts both containers as a service – you don't need to start each separately.   
+For example, assume you're building a project with NodeJS and MongoDB together. You can create a single `docker-compose.yaml` file that starts both containers as a service – you don't need to start each separately.   
 
 ### Key Benefits of Docker Compose
 
@@ -103,8 +103,9 @@ Let's discuss the above code and understand it piece by piece:
 
 `depends_on`: This ensures that app starts only after mongo is initialized
 
-<br>
-### How to run the multi-container    
+<br>    
+
+### Docker-Compose Commands 
 
 After creating compose file we can built & run our infrastructure with single command.
 
