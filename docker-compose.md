@@ -161,8 +161,8 @@ docker compose down
       
    Before running docker-compose file user will run following in terminal:   
    ```bash
-   export USER = admin
-   export PASSWORD = pass
+   export USER=admin
+   export PASSWORD=pass
    ```   
 
    ### 2. Top-Level Secrets in Docker-Compose    
