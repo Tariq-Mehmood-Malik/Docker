@@ -15,25 +15,19 @@ For example, assume you're building a project with NodeJS and MongoDB together. 
 
 ### Key Benefits of Docker Compose
 
-1. **New Network**  
+1. **Network Isolation**  
    Docker Compose automatically creates a new network for that infrastructure, ensuring isolated communication from other container/ ifrrastructures.
 
 2. **Unique Resource Names**  
    By default, Docker Compose sets a prefix for all resources (containers, networks, volumes) based on the project directory name, making it easier to manage and identify resources specific to a project.
 
-3. **Multi-Container Management**  
-   Easily define and run multi-container Docker applications with a single configuration file (`docker-compose.yml`).
-
-4. **Consistency**  
+3. **Consistency**  
    Ensures that the environment is consistent across all stages (development, testing, production).
 
-5. **Automation**  
+4. **Automation**  
    Automates container deployment, scaling, and orchestration tasks.
 
-6. **Isolation**  
-   Each service runs in its container, providing isolation while allowing them to communicate seamlessly.
-
-7. **Easy Setup and Scaling**  
+5. **Easy Setup and Scaling**  
    Easily start, stop, and scale up/down services with simple commands (`docker-compose up`, `docker-compose down`).
 
 
@@ -143,3 +137,37 @@ To Stop & remove all services.
 ```bash
 docker compose down
 ```
+
+### Defining Credebtials
+
+   In docker-compose file you can define credentiasl in enviroment section as below for dependent service like your app service need access of your database service.   
+   
+   ```yaml
+       environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pass
+   ```
+
+   This is recommended method as it can expose credentials if we host our docker-compose file to github registery to solve this we can use any method of following.
+
+   ### 1. Set environment variables temporarily   
+   In this method user export credentials to terminal and not define in docker-compose file like following:     
+   In docker-compose we define veriables as following:   
+   ```yaml
+       environment:
+      MYSQL_USER: ${USER}
+      MYSQL_PASSWORD: ${PASSWORD}
+   ```
+      
+   Before running docker-compose file user will run following in terminal:   
+   ```bash
+   export USER = admin
+   export PASSWORD = pass
+   ```   
+
+   ### 2. Run Docker with the environment variables:   
+   In this user 
+   
+   docker run -e MYSQL_USER=root -e MYSQL_PASSWORD=pass mysql:latest
+
+   
