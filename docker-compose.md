@@ -143,7 +143,7 @@ docker compose down
    In docker-compose file you can define credentiasl in enviroment section as below for dependent service like your app service need access of your database service.   
    
    ```yaml
-       environment:
+   environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: pass
    ```
@@ -154,7 +154,7 @@ docker compose down
    In this method user export credentials to terminal and not define in docker-compose file like following:     
    In docker-compose we define veriables as following:   
    ```yaml
-       environment:
+   environment:
       MYSQL_USER: ${USER}
       MYSQL_PASSWORD: ${PASSWORD}
    ```
