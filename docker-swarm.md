@@ -43,64 +43,64 @@ Docker Swarm mainly consists of two modes they are:
 ---
 ### Docker Swarm Creation & Management
 
-Before creating docker-swarm we need to allow certain network port to open for docker swarm to work with following command:
+- Before creating docker-swarm we need to allow certain network port to open for docker swarm to work with following command:
 ```bash
 sudo ufw allow 2377,7946,4789/tcp
 ```
 
-To initialize the docker swarm cluster we use the command called `docker swarm init`.
+- To initialize the docker swarm cluster we use the command called `docker swarm init`.
 
 ```bash
 docker swarm init
 ```
 
-After this command docker will provide you token to use on nodes to join cluster as worker nodes.
+- After this command docker will provide you token to use on nodes to join cluster as worker nodes.
 Example:
 ```txt
 docker swarm join --token <token-id> <network-id>:2377
 ```
 
-To check cluster node run following command in `Manager Node`:
+- To check cluster node run following command in `Manager Node`:
 ```bash
 docker node ls
 ```
 
-Creating service with 2 replication in swarm:
+- Creating service with 2 replication in swarm:
 ```bash
 docker service create --name web --publish target=80,published=83 --replicas=2 nginx
 ```
 
-Creating service with 2 replication in swarm:
+- Creating service with 2 replication in swarm:
 ```bash
 docker service create --name ping --replicas=2 alpine ping 8.8.8.8
 ```
 
-Checking running services
+- Checking running services
 ```bash
 docker service ls
 ```
 
-Inspecting dokcer node
+- Inspecting dokcer node
 ```bash
 docker node inspect <node-id>
 ```
 
-Inspecting dokcer service
+- Inspecting dokcer service
 ```bash
 docker service inspect <service-id>
 ```
 
-Viewing dokcer service logs
+- Viewing dokcer service logs
 ```bash
 docker service logs <service-id>
 ```
 
-Scaling running service:
+- Scaling running service:
 ```bash
 docker service scale <service-id>=5
 ```
 
-Veiw new overlay networks created by docker-swarm:
+- Veiw new overlay networks created by docker-swarm:
 ```bash
 docker network ls
 ```
