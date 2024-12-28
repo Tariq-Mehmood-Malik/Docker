@@ -100,7 +100,7 @@ Let's discuss the above code and understand it piece by piece:
 
 ## Docker-Compose Commands 
 
-After creating compose file we can built & run our infrastructure with single command.
+After creating compose file we can built & run our infrastructure with following commands.
 
 To build but not start infrastructure.
 ```bash
@@ -135,7 +135,13 @@ docker compose kill
 To Stop & remove all services.
 ```bash
 docker compose down
-```   
+```
+
+To removes stopped service containers
+```bash
+docker compose rm <service-name>
+```
+   
 ---
 
 ## Defining Credentials
