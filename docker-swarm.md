@@ -47,60 +47,65 @@ Docker Swarm mainly consists of two modes they are:
 ```bash
 sudo ufw allow 2377,7946,4789/tcp
 ```
-
+<br>
 - To initialize the docker swarm cluster we use the command called `docker swarm init`.
 
 ```bash
 docker swarm init
 ```
-
+<br>
 - After this command docker will provide you token to use on nodes to join cluster as worker nodes.
 Example:
 ```txt
 docker swarm join --token <token-id> <network-id>:2377
 ```
-
+<br>
 - To check cluster node run following command in `Manager Node`:
 ```bash
 docker node ls
 ```
-
+<br>
 - Creating service with 2 replication in swarm:
 ```bash
 docker service create --name web --publish target=80,published=83 --replicas=2 nginx
 ```
-
+<br>
 - Creating service with 2 replication in swarm:
 ```bash
 docker service create --name ping --replicas=2 alpine ping 8.8.8.8
 ```
-
+<br>
 - Checking running services
 ```bash
 docker service ls
 ```
-
+<br>
 - Inspecting dokcer node
 ```bash
 docker node inspect <node-id>
 ```
-
+<br>
 - Inspecting dokcer service
 ```bash
-docker service inspect <service-id>
+docker service inspect <service-name>
 ```
-
+<br>
 - Viewing dokcer service logs
 ```bash
-docker service logs <service-id>
+docker service logs <service-name>
 ```
-
+<br>
 - Scaling running service:
 ```bash
-docker service scale <service-id>=5
+docker service scale <service-name>=5
 ```
-
+<br>
 - Veiw new overlay networks created by docker-swarm:
 ```bash
 docker network ls
+```
+<br>
+- Viewing dokcer service logs
+```bash
+docker service rm <service-name>
 ```
