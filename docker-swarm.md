@@ -1,6 +1,6 @@
 ## Docker Swarm
 
-Docker Swarm is a container orchestration tool provided by Docker, allowing us to create and manage a cluster of Docker hosts / nodes, which work together as a single virtual system to deploy and manage Docker containers. 
+Docker Swarm is a container orchestration (means it manage and coordinates with multiple containers to work together efficiently) tool provided by Docker, allowing us to create and manage a cluster of Docker hosts / nodes, which work together as a single virtual system to deploy and manage Docker containers. 
 It is an integral part of Docker's ecosystem for scaling and managing containers in production environments. Each node in docker swarm is `docker daemon` which are interacted by docker API. 
 For this Docker uses an overlay network for the service discovery and with a built-in load balancer for scaling the services.
 
@@ -49,3 +49,4 @@ To initialize the docker swarm cluster we use the command called `docker swarm i
 docker swarm init
 ```
 
+After this command docker will provide you token to use on nodes to join clister as worker nodes.
