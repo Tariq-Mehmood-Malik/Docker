@@ -165,9 +165,36 @@ docker compose down
    export PASSWORD = pass
    ```   
 
-   ### 2. Run Docker with the environment variables:   
-   In this user 
+   ### 2. Top-Level Secrets in Docker-Compose    
+   In Docker Compose, a top-level `secrets` element is used to define sensitive data (such as passwords, API keys, or certificates) that you want to make available to services in a secure way. This feature was introduced in Docker Compose file version 3.1 and later, and it allows you to securely manage sensitive information without embedding them directly in your service definitions.
    
-   docker run -e MYSQL_USER=root -e MYSQL_PASSWORD=pass mysql:latest
+   ```yaml
+   version: '3.7'
+
+   # Top-level secrets element
+   secrets:
+     my_secret_1:
+       file: ./my_secret_file_1.txt  # This file contains the secret
+     my_secret_2:
+       file: ./my_secret_file_2.txt  # This file contains the secret
+
+   services:
+     web:
+       image: nginx:latest
+       secrets:
+         - my_secret_1  # Referencing the secret for the web service
+
+     app:
+       image: myapp:latest
+       secrets:
+         - my_secret_2  # Referencing the same secret for another service
+   ```   
+
+   Secret text file synatax example:   
+   ```txt
+   MY_SECRET_KEY=abcdef1234567890
+   MY_API_KEY=9876543210abcdef
+   ```
+
 
    
