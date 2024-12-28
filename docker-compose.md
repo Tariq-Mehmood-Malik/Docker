@@ -98,7 +98,7 @@ Let's discuss the above code and understand it piece by piece:
 
 ---   
 
-### Docker-Compose Commands 
+## Docker-Compose Commands 
 
 After creating compose file we can built & run our infrastructure with single command.
 
@@ -135,9 +135,10 @@ docker compose kill
 To Stop & remove all services.
 ```bash
 docker compose down
-```
+```   
 ---
-### Defining Credentials
+
+## Defining Credentials
 
    In docker-compose file you can define credentiasl in enviroment section as below for dependent service like your app service need access of your database service.   
    
