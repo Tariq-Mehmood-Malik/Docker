@@ -17,7 +17,7 @@ For example, assume you're building a project with NodeJS and MongoDB together. 
 1. **Network Isolation**  
    Docker Compose automatically creates a new network for that infrastructure, ensuring isolated communication from other container/ ifrrastructures.
 
-2. **Unique Resource Names**  
+2. **Unique Resource Identity**  
    By default, Docker Compose sets a prefix for all resources (containers, networks, volumes) based on the project directory name, making it easier to manage and identify resources specific to a project.
 
 3. **Consistency**  
