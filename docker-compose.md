@@ -97,7 +97,7 @@ Let's discuss the above code and understand it piece by piece:
 
 `depends_on`: This ensures that app starts only after mongo is initialized
 
-<br>    
+---   
 
 ### Docker-Compose Commands 
 
@@ -137,8 +137,8 @@ To Stop & remove all services.
 ```bash
 docker compose down
 ```
-
-### Defining Credebtials
+---
+### Defining Credentials
 
    In docker-compose file you can define credentiasl in enviroment section as below for dependent service like your app service need access of your database service.   
    
@@ -148,7 +148,7 @@ docker compose down
       MYSQL_PASSWORD: pass
    ```
 
-   This is recommended method as it can expose credentials if we host our docker-compose file to github registery to solve this we can use any method of following.
+   This is not recommended method as it can expose credentials if we share our docker-compose file to github or locally, to solve this we can use any of the following methods:
 
    ### 1. Set environment variables temporarily   
    In this method user export credentials to terminal and not define in docker-compose file like following:     
