@@ -1,5 +1,4 @@
 # Docker Compose
----
 
 ## Why we need Docker Compose   
 
