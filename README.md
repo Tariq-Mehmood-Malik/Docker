@@ -12,6 +12,7 @@
 - [Dockerfile](dockerfile.md)
 - [Docker Compose](docker-compose.md)
 - [Docker Swarm](docker-swarm.md)
+- [Docker Stack](docker-stack.md)
 - [Docker Commands all](docker-commands.md) 
 ---
 # What is Docker
