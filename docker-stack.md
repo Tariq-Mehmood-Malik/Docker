@@ -22,7 +22,7 @@ services:
     networks:
       - webnet
     deploy:
-      replicas: 3
+      replicas: 2
       placement:
         constraints:
           - node.role == manager
