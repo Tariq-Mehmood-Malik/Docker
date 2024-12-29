@@ -14,6 +14,8 @@ Docker will update the configuration, stop the service tasks with the out-of-dat
 When you want to deploy a container in the swarm first you have to create a service. Service consists of multiple task / containers of the same image. 
 These services are deployed inside a nodes so to deploy a swarm at least one node has to be deployed. Manager node is responsible for the allocation of the task, dispatch the tasks, and schedule the tasks.
 
+#### Key Banefits of Docker-Swarm
+
 - Docker Swarm assures that our application is always available even if one of the nodes fails by creating the container in another node which is available.
   
 - Based on the incoming traffic we can scale the containers up and down by adding to the multiple nodes.    
@@ -28,9 +30,9 @@ These services are deployed inside a nodes so to deploy a swarm at least one nod
 There are two types of nodes in Docker Swarm:    
 ![docker-swarm-mode.webp](images/docker-swarm-mode.webp)     
 <br>
-**Manager node:** Carries out and oversees cluster-level duties.     
+**Manager node:** Cluster can has multiple manager nodes but only one leader, leader mangaer node carries out and oversees cluster-level duties.     
 **Worker node:** Receives and completes the tasks set by the manager node.   
-A single manager node can be created but the worker node can not be created without a manager node.
+A single manager node can be created but the worker node can not be created without a manager node. A manager is also create service task inside him as well.      
 
 
 ### Different Modes of Docker Swarm
