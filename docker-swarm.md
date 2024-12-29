@@ -42,6 +42,9 @@ Docker Swarm mainly consists of two modes they are:
  
 - **Replicated Mode:** Defines a specific number of container instances (tasks) to run. The number of replicas is specified, and Docker Swarm ensures that exactly that number of tasks are running across the swarm nodes.
 
+
+To access the service eneter `Manager (Leader) IP` with desired port.
+
 ---
 ### Docker Swarm Creation & Management
 
