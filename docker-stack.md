@@ -8,6 +8,7 @@ The Compose file includes the entire stack of microservices that make up the app
 
 Docker Stack makes it easier to deploy, scale, and manage services across multiple Docker hosts as part of a Swarm cluster. 
 It abstracts away the complexity of handling individual containers and their interactions, allowing you to define an entire application's architecture in a single yaml file.
+In Docker-Stack each stack create its own overlay network (over default overlay network) if network is not defined else create overlay network by name define in compose.yaml file.
 
 Example Yaml file for Docker Stack:   
 ```yaml
@@ -58,8 +59,52 @@ Before deploying stack of services/ application please make sure `Docker swarm` 
 ```bash
 docker swarm init
 ```
+<br>
 
 Deploying docker stack command:
 ```bash
 docker stack deploy -c <file-name>.yml <New-Stack-Name>
 ```
+<br>
+
+View running stack.
+```bash
+docker stack ls
+```
+<br>
+
+View running stack services
+```bash
+docker stack services <Stack-Name>
+```
+<br>
+
+Lists the tasks (containers) in a stack.
+```bash
+docker stack ps <stack-name>
+```
+<br>
+
+Removes a stack from the Docker Swarm.
+```bash
+docker stack rm <stack-name>
+```
+<br>
+
+Inspects a stack in the Swarm to provide detailed information.
+```bash
+docker stack inspect <stack-name>
+```
+<br>
+
+Executes a command on a service container in a stack.
+```bash
+docker stack exec <stack-name> <service-name> <command>
+```
+<br>
+
+Validates and views a Docker Compose file for stack deployment.
+```bash
+docker stack config -c <compose-file>
+```
+<br>
