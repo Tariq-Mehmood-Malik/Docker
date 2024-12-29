@@ -12,36 +12,51 @@ In Docker-Stack each stack create its own overlay network (over default overlay 
 
 Example Yaml file for Docker Stack:   
 ```yaml
-version: '3'
+version: "3.8"
 
 services:
-  frontend:
-    image: my-web-app:latest
-    deploy:
-      replicas: 2  # Swarm mode: Scale the frontend to 2 instances
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
     networks:
       - webnet
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: example_password
+      MYSQL_DATABASE: example_db
 
-  backend:
+  mysql:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: pass  # Set the root password for MySQL
+      MYSQL_ROOT_PASSWORD: example_password
+      MYSQL_DATABASE: example_db
     networks:
       - webnet
     volumes:
-      - db-data:/var/lib/mysql  # Persist MySQL data in a volume
+      - mysql-data:/var/lib/mysql
+    deploy:
+      replicas: 1
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]  # Check if MySQL is reachable
-      interval: 30s  # Check every 30 seconds
-      retries: 5  # Retry 5 times before marking the service as unhealthy
-      start_period: 10s  # Wait 10 seconds before starting the health check
-      timeout: 10s  # Timeout the health check after 10 seconds
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
 
 networks:
-  webnet:  # Define the network for both frontend and backend to communicate
+  webnet:
+    driver: overlay
 
 volumes:
-  db-data:  # Define a volume to persist database data
+  mysql-data:
+    driver: local
 
 ```
 
