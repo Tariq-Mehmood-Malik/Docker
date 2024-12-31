@@ -150,7 +150,7 @@ Update below in kube-flannel.yml. The interface(--iface) needs to be added if vi
       - args:
         - --ip-masq
         - --kube-subnet-mgr
-		- --iface eth1
+        - --iface eth1
 ```
 Apply flannel configuration in cluster
 
