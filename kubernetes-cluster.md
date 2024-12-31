@@ -92,6 +92,8 @@ sudo nano /etc/containerd/config.toml
 
 Restart Containerd
 ```bash
+sudo systemctl restart containerd
+
 systemctl status containerd
 ```
 
