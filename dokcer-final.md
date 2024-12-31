@@ -21,26 +21,37 @@ docker run -d --name linuxe alpine ping 8.8.8.8
 ```
 #### Each container should be running in both networks
 
+```bash
 docker network connect prod linux
 docker network connect dev linux
+```
 
+```bash
 docker network connect prod data-base
 docker network connect dev data-base
+```
 
+```bash
 docker network connect prod web-site
 docker network connect dev web-site
-
+```
 
 #### The database container of Dev network should be accessible to prod one during migration
 
+```bash
 docker exec -it 
+```
 
 ## DOCKER VOLUME
 
 #### 4. Create a named volume pv-0123475
+
+```bash
 docker volume create pv-0123475
 cd /var/lib/docker/volumes/data/_data
 nano index.html
+```
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -76,9 +87,12 @@ docker volume ls
 
 #### 5. Make /tmp/baz as volume
 
+```bash
 mkdir /tmp/baz
 cd /tmp/baz/
 nano index.html
+```
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -113,12 +127,13 @@ nano index.html
 
 #### 6. Connect volume to three containers and access data, but container03 should only read access.
 
+```bash
 docker run --name cont-01 -p 8081:80 -v pv-0123475:/usr/share/nginx/html/ nginx 
 
 docker run --name cont-02 -p 8082:80 -v /tmp/baz/:/usr/share/nginx/html/ nginx 
 
 docker run --name cont-03 -p 8083:80 -v pv-0123475:/usr/share/nginx/html/:ro nginx 
-
+```
 
 ## DOCKER COMPOSE
 
