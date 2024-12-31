@@ -2,19 +2,123 @@
 
 ## DOCKER NETWORKS
 
-#### 1. Create two networks prod and dev for creating the following containers (Database, website, and a Linux) 
+#### Create two networks prod and dev for creating the following containers (Database, website, and a Linux) 
 
-#### 2. Each container should be running in both networks
+docker network create --driver bridge prod
 
-#### 3. The database container of Dev network should be accessible to prod one during migration
+docker network create --driver bridge dev
+
+```bash
+docker run -d --name data-base -e MYSQL_ROOT_PASSWORD=pass -p 3306:3306 mysql
+```
+
+```bash
+docker run -d --name web-site -p 8080:80 nginx
+```
+
+```bash
+docker run -d --name linuxe alpine ping 8.8.8.8
+```
+#### Each container should be running in both networks
+
+docker network connect prod linux
+docker network connect dev linux
+
+docker network connect prod data-base
+docker network connect dev data-base
+
+docker network connect prod web-site
+docker network connect dev web-site
+
+
+#### The database container of Dev network should be accessible to prod one during migration
+
+docker exec -it 
 
 ## DOCKER VOLUME
 
 #### 4. Create a named volume pv-0123475
+docker volume create pv-0123475
+cd /var/lib/docker/volumes/data/_data
+nano index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Page</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>This is a simple HTML page to showcase a basic structure.</p>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <p>You can reach me at <a href="mailto:example@example.com">example@example.com</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+```
+docker volume ls
 
 #### 5. Make /tmp/baz as volume
 
+mkdir /tmp/baz
+cd /tmp/baz/
+nano index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Page</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Website</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>This is a simple HTML page to showcase a basic structure.</p>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <p>You can reach me at <a href="mailto:example@example.com">example@example.com</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+```
+
 #### 6. Connect volume to three containers and access data, but container03 should only read access.
+
+docker run --name cont-01 -p 8081:80 -v pv-0123475:/usr/share/nginx/html/ nginx 
+
+docker run --name cont-02 -p 8082:80 -v /tmp/baz/:/usr/share/nginx/html/ nginx 
+
+docker run --name cont-03 -p 8083:80 -v pv-0123475:/usr/share/nginx/html/:ro nginx 
+
 
 ## DOCKER COMPOSE
 
