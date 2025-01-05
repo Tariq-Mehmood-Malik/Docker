@@ -189,16 +189,82 @@ docker run -d --name cont-03 -p 8083:80 -v /tmp/baz/:/usr/share/nginx/html/:ro n
 <br>
 
 
-
 ## DOCKER COMPOSE
 
 #### 7. You need to run a 3-tier application on a containerized environment containing (mongo, nginx and Redis) and you will take help of Docker Compose, but with following conditions
 
 #### a) Web container should be built with own image showing your name & Batch details
 
-#### b) mongo db can be run directly
+- I am not Full-stack developer so i dont know how to code and integrate these 3 application but i am making docker-compose.yaml with my knowledge to create containers with required 3 containers.
 
-#### c) redis should run on image which is one version below latest
+- Creating web imagename `tariq-devops-12:1` from Dockerfile with custome `index.html`.
+
+```dockerfile                                                                    
+FROM ubuntu:latest
+
+RUN apt-get update && \
+    apt-get install -y nginx && \
+    apt-get clean
+
+COPY index.html /var/www/html/index.html
+
+EXPOSE 80
+    
+CMD ["nginx", "-g", "daemon off;"]
+```
+```bash
+docker build -t tariq-devops-12:1 .
+```
+
+![03-01](images/final-task/03-01.png)
+<br>
+
+#### b) mongo db can be run directly  &  c) redis should run on image which is one version below latest
+
+- Creating docker-compose.yaml, using older version of mongo as newer version required `CPU with AVX` which is causing conatiner to crashes.
+
+```yaml
+version: '3'
+services:
+  web:
+    image: tariq-devops-12:1
+    container_name: web_tariq
+    ports:
+      - 8080:80
+
+  db:
+    image: mongo:4.4
+    container_name: app_mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - db_volume:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+      - MONGO_INITDB_DATABASE=myappdb
+
+  cache:
+    image: redis:7.2
+    container_name: cache_cont
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_volume:/data
+    restart: always     
+
+volumes:
+  db_volume:
+  redis_volume:
+```
+
+```bash
+docker compose up -d
+```
+
+![03-02](images/final-task/03-02.png)
+<br>
 
 
 ## DOCKER SWARM
