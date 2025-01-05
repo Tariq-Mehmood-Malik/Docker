@@ -2,7 +2,7 @@
 
 ## DOCKER NETWORKS
 
-#### Create two networks prod and dev for creating the following containers (Database, website, and a Linux) 
+#### 1. Create two networks prod and dev for creating the following containers (Database, website, and a Linux) 
 
 - Creating network `dev` & `prod`.
 
@@ -15,7 +15,7 @@ docker network create --driver bridge dev
 ![01-01](images/final-task/01-01.png)
 <br><br>
 
-#### Each container should be running in both networks
+#### 2. Each container should be running in both networks
 
 - Creating Database, website, and a Linux conatiner in both networks
 ```bash
@@ -39,7 +39,7 @@ docker ps
 ![01-02](images/final-task/01-02.png)
 <br><br>
 
-#### The database container of Dev network should be accessible to prod one during migration
+#### 3. The database container of Dev network should be accessible to prod one during migration
 
 - Connecting database container of dev network (db-dev) to prod network for smooth access.
 
@@ -73,9 +73,14 @@ docker exec -it ws-prod mysql -h db-dev -u root -p
 ```bash
 docker volume create pv-0123475
 docker volume ls
-cd /var/lib/docker/volumes/data/_data
+sudo -i
+cd /var/lib/docker/volumes/pv-0123475/_data
 nano index.html
 ```
+![02-01](images/final-task/02-01.png)
+<br>
+
+
 - HTML file code.    
 ```html
 <!DOCTYPE html>
@@ -117,6 +122,9 @@ mkdir /tmp/baz
 cd /tmp/baz/
 nano index.html
 ```
+![02-02](images/final-task/02-02.png)
+<br>
+
 
 ```html
 <!DOCTYPE html>
@@ -152,13 +160,35 @@ nano index.html
 
 #### 6. Connect volume to three containers and access data, but container03 should only read access.
 
+- Creating nginx container `cont-01` with named volume `pv-0123475`
 ```bash
-docker run --name cont-01 -p 8081:80 -v pv-0123475:/usr/share/nginx/html/ nginx 
-
-docker run --name cont-02 -p 8082:80 -v /tmp/baz/:/usr/share/nginx/html/ nginx 
-
-docker run --name cont-03 -p 8083:80 -v /tmp/baz/:/usr/share/nginx/html/:ro nginx 
+docker run -d --name cont-01 -p 8081:80 -v pv-0123475:/usr/share/nginx/html/ nginx
 ```
+- Accessing nginx on localhost.
+
+![02-03](images/final-task/02-03.png)
+<br>
+
+- Creating nginx container `cont-02` with volume `/tmp/baz/`
+```bash
+docker run -d --name cont-02 -p 8082:80 -v /tmp/baz/:/usr/share/nginx/html/ nginx 
+```
+- Accessing nginx on localhost.
+
+![02-04](images/final-task/02-04.png)
+<br>
+
+- Creating nginx container `cont-03` with volume `/tmp/baz/` and read only access.
+```bash
+docker run -d --name cont-03 -p 8083:80 -v /tmp/baz/:/usr/share/nginx/html/:ro nginx 
+```
+
+- Trying to remove file of attached volume in container.   
+
+![02-05](images/final-task/02-05.png)
+<br>
+
+
 
 ## DOCKER COMPOSE
 
