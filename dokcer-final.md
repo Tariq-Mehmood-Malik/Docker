@@ -12,7 +12,7 @@ docker network create --driver bridge prod
 ```bash
 docker network create --driver bridge dev
 ```
-![01-01](01-01.png)
+![01-01](images/final-task/01-01.png)
 <br><br>
 
 #### Each container should be running in both networks
@@ -36,7 +36,7 @@ docker run -d --name l-prod --network prod alpine ping 8.8.8.8
 docker ps
 ```
 
-![01-02](01-02.png)
+![01-02](images/final-task/01-02.png)
 <br><br>
 
 #### The database container of Dev network should be accessible to prod one during migration
@@ -60,7 +60,7 @@ apt-get install default-mysql-client
 docker exec -it ws-prod mysql -h db-dev -u root -p
 ```
 
-![01-03](01-03.png)
+![01-03](images/final-task/01-03.png)
 <br><br>
 
 
