@@ -4,43 +4,66 @@
 
 #### Create two networks prod and dev for creating the following containers (Database, website, and a Linux) 
 
+- Creating network `dev` & `prod`.
+
+```bash
 docker network create --driver bridge prod
-
+```
+```bash
 docker network create --driver bridge dev
-
-```bash
-docker run -d --name data-base --network prod -e MYSQL_ROOT_PASSWORD=pass -p 3306:3306 mysql
 ```
+![01-01](01-01.png)
+<br><br>
 
-```bash
-docker run -d --name web-site --network prod -p 8080:80 nginx
-```
-
-```bash
-docker run -d --name linuxe --network prod alpine ping 8.8.8.8
-```
 #### Each container should be running in both networks
 
+- Creating Database, website, and a Linux conatiner in both networks
 ```bash
-docker network connect prod linux
-docker network connect dev linux
+docker run -d --name db-dev --network dev -e MYSQL_ROOT_PASSWORD=pass -p 3306:3306 mysql
+docker run -d --name db-prod --network prod -e MYSQL_ROOT_PASSWORD=pass -p 3307:3306 mysql
 ```
 
 ```bash
-docker network connect prod data-base
-docker network connect dev data-base
+docker run -d --name ws-dev --network dev -p 8080:80 nginx
+docker run -d --name ws-prod --network prod -p 8081:80 nginx
 ```
 
 ```bash
-docker network connect prod web-site
-docker network connect dev web-site
+docker run -d --name l-dev --network dev alpine ping 8.8.8.8
+docker run -d --name l-prod --network prod alpine ping 8.8.8.8
 ```
+```bash
+docker ps
+```
+
+![01-02](01-02.png)
+<br><br>
 
 #### The database container of Dev network should be accessible to prod one during migration
 
+- Connecting database container of dev network (db-dev) to prod network for smooth access.
+
 ```bash
-docker exec -it 
+docker network connect prod db-dev
 ```
+
+- Installing mysql-client in nginx container to access mysql database.
+
+```bash
+docker exec -it wb-prod bash
+apt-get update
+apt-get install default-mysql-client
+```
+- Accessing dev-database from prod nginx container.
+
+```bash
+docker exec -it ws-prod mysql -h db-dev -u root -p
+```
+
+![01-03](01-03.png)
+<br><br>
+
+
 
 ## DOCKER VOLUME
 
