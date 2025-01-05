@@ -69,12 +69,14 @@ docker exec -it ws-prod mysql -h db-dev -u root -p
 
 #### 4. Create a named volume pv-0123475
 
+- Creating named volume `pv-0123475` for nginx container and putting sample index.html file in it.
 ```bash
 docker volume create pv-0123475
+docker volume ls
 cd /var/lib/docker/volumes/data/_data
 nano index.html
 ```
-
+- HTML file code.    
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -106,10 +108,10 @@ nano index.html
 </body>
 </html>
 ```
-docker volume ls
 
 #### 5. Make /tmp/baz as volume
 
+- Creating directory `/tmp/baz` and creating sample index.html for nginx container.   
 ```bash
 mkdir /tmp/baz
 cd /tmp/baz/
@@ -155,7 +157,7 @@ docker run --name cont-01 -p 8081:80 -v pv-0123475:/usr/share/nginx/html/ nginx
 
 docker run --name cont-02 -p 8082:80 -v /tmp/baz/:/usr/share/nginx/html/ nginx 
 
-docker run --name cont-03 -p 8083:80 -v pv-0123475:/usr/share/nginx/html/:ro nginx 
+docker run --name cont-03 -p 8083:80 -v /tmp/baz/:/usr/share/nginx/html/:ro nginx 
 ```
 
 ## DOCKER COMPOSE
