@@ -456,7 +456,7 @@ docker stack deploy -c portainer.yaml portainer
 
 #### 11) We have 17 containers and we are unable to manage it properly, as a DevOps Engineer what is your suggestion
 
-- As a DevOps engineer I would suggest using a management/ orchestration tool like `Docker Swarm` to easily control, deploy, and scale applications across a multi-node infrastructure to ensures high availability and scalability. And also use a GUI tool like `Portainer` to view, diagnose, and manage cluster & conatiners easily.
+- As a DevOps engineer I would suggest using a management/ orchestration tool like `Docker Swarm` to easily control, deploy, and scale applications across a multi-node infrastructure to ensures high availability and easy scalability. And also use a GUI tool like `Portainer` to view, diagnose, and manage cluster & conatiners easily.
 
 #### 12) Use Image (https://hub.docker.com/repository/docker/engineerbaz/app-devops-project1/) and test a container, but add another package of your choice and rebuilt the image to push on the registry
 
