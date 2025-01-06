@@ -283,7 +283,7 @@ docker swarm init
 
 - Joining worker node to swarm cluster
 ```bash
-docker swarm join --token SWMTKN-1-3pgy8cb768bosknfx3lp9c8j1qyxuzlzso092qdv0wg2makamh-0yfd7ukcvs740d59anycqoby3 192.168.0.170:2377
+docker swarm join --token <token-id> 192.168.0.170:2377
 ```
 
 ![04-02](images/final-task/04-02.png)
@@ -394,6 +394,41 @@ docker stack services web-nginx
 <br>
 
 #### 10) Install Portainer and deploy any two Application from templates list
+
+- Creating yaml file portainer.
+```yaml
+ersion: '3.7'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - portainer_network
+
+volumes:
+  portainer_data:
+    driver: local
+
+networks:
+  portainer_network:
+    driver: overlay
+```
+
+```bash
+docker stack deploy -c portainer.yaml portainer
+docker stack serices portainer
+```
 
 
 ## MISC
