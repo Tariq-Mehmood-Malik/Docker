@@ -202,9 +202,7 @@ docker run -d --name cont-03 -p 8083:80 -v /tmp/baz/:/usr/share/nginx/html/:ro n
 ```dockerfile                                                                    
 FROM ubuntu:latest
 
-RUN apt-get update && \
-    apt-get install -y nginx && \
-    apt-get clean
+RUN apt-get update && apt-get install -y nginx
 
 COPY index.html /var/www/html/index.html
 
