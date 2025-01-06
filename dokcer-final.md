@@ -427,9 +427,30 @@ networks:
 
 ```bash
 docker stack deploy -c portainer.yaml portainer
-docker stack serices portainer
 ```
 
+![06-01](images/final-task/06-01.png)
+<br>
+<br>
+
+
+
+![06-02](images/final-task/06-02.png)
+<br>
+
+
+- Installing 2 apps from templates.
+
+![06-05](images/final-task/06-05.png)
+<br>
+
+
+![06-03](images/final-task/06-03.png)
+<br>
+
+
+![06-04](images/final-task/06-04.png)
+<br>
 
 ## MISC
 
