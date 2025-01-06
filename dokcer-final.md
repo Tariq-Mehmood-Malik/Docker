@@ -195,7 +195,7 @@ docker run -d --name cont-03 -p 8083:80 -v /tmp/baz/:/usr/share/nginx/html/:ro n
 
 #### a) Web container should be built with own image showing your name & Batch details
 
-- I am not Full-stack developer so i dont know how to code and integrate these 3 application but i am making docker-compose.yaml with my knowledge to create containers with required 3 containers.
+- I dont know how to code and integrate these 3 applications but i am making docker-compose.yaml with my knowledge to create required 3 containers.
 
 - Creating web imagename `tariq-devops-12:1` from Dockerfile with custome `index.html`.
 
@@ -212,6 +212,7 @@ EXPOSE 80
     
 CMD ["nginx", "-g", "daemon off;"]
 ```
+
 ```bash
 docker build -t tariq-devops-12:1 .
 ```
@@ -271,11 +272,126 @@ docker compose up -d
 
 #### 8)Install Docker Swarm and deploy 3 containers
 
+- Initialing docker swarm.
+```bash
 docker swarm init
+```
 
-docker service create --name web --publish target=80,published=83 --replicas=2 nginx 
+![04-01](images/final-task/04-01.png)
+<br>
+
+
+- Joining worker node to swarm cluster
+```bash
+docker swarm join --token SWMTKN-1-3pgy8cb768bosknfx3lp9c8j1qyxuzlzso092qdv0wg2makamh-0yfd7ukcvs740d59anycqoby3 192.168.0.170:2377
+```
+
+![04-02](images/final-task/04-02.png)
+<br>
+
+- Checking nodes list
+```bash
+docker node ls
+```
+
+![04-03](images/final-task/04-03.png)
+<br>
+
+
+- Creating docker swarm stack with 3 containers.
+```yaml
+ version: '3.7'
+
+services:
+  web:
+    image: nginx
+    ports:
+      - 8080:80
+    deploy:
+      replicas: 2
+
+  db:
+    image: mongo:4.4
+    ports:
+      - 27017:27017
+    volumes:
+      - db_volume:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+      - MONGO_INITDB_DATABASE=myappdb
+    deploy:
+      replicas: 2
+
+  cache:
+    image: redis:7.2
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_volume:/data
+    deploy:
+      replicas: 2
+
+volumes:
+  db_volume:
+  redis_volume:
+```
+
+```bash
+docker stack deploy -c stack.yaml applications
+docker stack services applications
+docker stack ps applications
+```
+
+![04-04](images/final-task/04-04.png)
+<br>
 
 #### 9) We need to create a web container but image can not be downloaded from Docker hub or local
+
+- Building custom image from `Dockerfile`.
+
+```dockerfile                                                                    
+FROM ubuntu:latest
+
+RUN apt-get update && \
+    apt-get install -y nginx && \
+    apt-get clean
+
+COPY index.html /var/www/html/index.html
+
+EXPOSE 80
+    
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+```bash
+docker build -t tariq-dev12:1 .
+```
+
+![05-01](images/final-task/05-01.png)
+<br>
+
+- Creating yaml file for above task to build image and deploy nginx conatiner with 2 replicas
+
+```yaml
+version: '3.7'
+
+services:
+  web:
+    image: tariq-dev12:1
+    ports:
+      - "8080:80"
+    deploy:
+      replicas: 2
+```
+
+```bash
+docker stack deploy -c bilut.yaml web-nginx
+docker stack services web-nginx
+```
+
+![05-02](images/final-task/05-02.png)
+<br>
 
 #### 10) Install Portainer and deploy any two Application from templates list
 
