@@ -456,6 +456,92 @@ docker stack deploy -c portainer.yaml portainer
 
 #### 11) We have 17 containers and we are unable to manage it properly, as a DevOps Engineer what is your suggestion
 
+- As a DevOps engineer I would suggest using a management/ orchestration tool like `Docker Swarm` to easily control, deploy, and scale applications across a multi-node infrastructure to ensures high availability and scalability. And also use a GUI tool like `Portainer` to view, diagnose, and manage cluster & conatiners easily.
+
 #### 12) Use Image (https://hub.docker.com/repository/docker/engineerbaz/app-devops-project1/) and test a container, but add another package of your choice and rebuilt the image to push on the registry
 
+- Pulling the image and making container to test image
+```bash
+docker pull engineerbaz/app-devops-project1:latest
+docker run -d --name baz -p 8083:80 engineerbaz/app-devops-project1:latest
+```
+
+![07-01](images/final-task/07-01.png)
+<br>
+
+
+![07-02](images/final-task/07-02.png)
+<br>
+
+- Adding `ping` package in image through `Dockerfile` and buidling new image named `tariqmehmoodmalik/baz-image:1` to push to Docker-Hub.
+
+```dockerfile
+FROM engineerbaz/app-devops-project1:latest
+
+RUN apt-get update && apt-get install -y iputils-ping
+
+EXPOSE 80
+```
+
+```bash
+docker build -t tariqmehmoodmalik/baz-image:1 .
+```
+
+![07-03](images/final-task/07-03.png)
+<br>
+
+  
+- Running conatiner from new image to check if `ping` command is running.
+
+```bash
+docker run -d --name tariq-baz -p 8084:80 tariqmehmoodmalik/baz-image:1
+docker exec -it tariq-baz bash
+ping 8.8.8.8
+```
+
+
+![07-04](images/final-task/07-04.png)
+<br>
+
+- Pushig image to Docker-Hub
+
+```bash
+docker push tariqmehmoodmalik/baz-image:1
+```
+
+![07-05](images/final-task/07-05.png)
+<br>
+
+
+
+
+![07-06](images/final-task/07-06.png)
+<br>
+
+
 #### 13) Get data from https://github.com/engineerbaz/DevOps-B07-TrainingCourse/blob/main/learningTasks/project-todoList.md and run as a project
+
+- From given link created `index.html`, `style.css` & `script.js`.
+
+- Creating `Dockerfile` for webserver.
+
+```dockerfile
+FROM nginx:latest
+MAINTAINER tariq
+COPY . /usr/share/nginx/html/
+EXPOSE 80
+```
+
+- Builtiding image name `project:v1` and running container name `my-project` on port 8090.
+```bash
+docker build -t to-do:1 .
+docker run -d -p 8090:80 --name my-projcet to-do:1
+```
+  
+![08-01](images/final-task/08-01.png)
+<br>
+
+
+![08-02](images/final-task/08-02.png)
+<br>
+
