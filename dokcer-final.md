@@ -223,7 +223,7 @@ docker build -t tariq-devops-12:1 .
 - Creating docker-compose.yaml, using older version of mongo as newer version required `CPU with AVX` which is causing conatiner to crashes.
 
 ```yaml
-version: '3'
+version: '3.7'
 services:
   web:
     image: tariq-devops-12:1
@@ -508,9 +508,7 @@ docker push tariqmehmoodmalik/baz-image:1
 ```
 
 ![07-05](images/final-task/07-05.png)
-<br>
-
-
+<br><br>
 
 
 ![07-06](images/final-task/07-06.png)
