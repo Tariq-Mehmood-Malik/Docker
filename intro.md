@@ -55,7 +55,7 @@ Docker uses a client-server architecture. The Docker client talks to the Docker 
    It is the central server that manages Docker containers. It listens for Docker API requests (from the Docker CLI) and coordinates the container lifecycle. It interacts with `containerd` to manage container creation, execution, and destruction.
 
 **containerd**:            
-   It is a high-level container runtime responsible for pulling images, creating container, and managing containers. It communicates with `runc` to start containers and `shim` to maintain their lifecycle.
+   It is a high-level container runtime responsible for pulling images, creating container, and managing containers. runc and shim are key components of the containerd ecosystem.
 
 **runc**:          
    It is a low-level container runtime that sets up the container’s namespaces, cgroups, and other Linux features to ensure process isolation and resource management. It runs the actual container’s process.
