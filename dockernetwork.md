@@ -42,22 +42,11 @@ Some important concepts:
 ![dh01](images/dh01.webp)
 
 
-The Host network driver in Docker is a networking mode that allows containers to directly use the networking stack of the Docker host machine. When a container is run with the Host network driver, it bypasses Docker’s network abstraction layer and gains direct access to the host’s network interfaces, routing table, and ports. This means that the container shares the same network namespace as the host, using the host’s IP address and network configuration.
+The Host network driver in Docker is a networking mode that allows containers to directly use the networking stack of the Docker host machine, bypassing Docker’s network abstraction layer. In this mode, the container shares the same network namespace as the host, utilizing the host’s IP address and network configuration. This means the container does not get its own IP address and can directly access the host’s network interfaces, routing table, and ports. For example, if a container binds to port 80 and uses host networking, its application will be available on port 80 on the host's IP address.
 
-If you use the host network mode for a container, that container's network stack isn't isolated from the Docker host (the container shares the host's networking namespace), and the container doesn't get its own IP-address allocated. For instance, if you run a container which binds to port 80 and you use host networking, the container's application is available on port 80 on the host's IP address.
+Using the host network mode offers several advantages. It provides better performance due to reduced overhead and faster networking, simplifies configuration by eliminating the need for port mapping and enabling a unified network setup, and allows containers to directly access host resources like storage and hardware. Additionally, it avoids the complexity of virtual network overhead. However, this approach also has notable downsides. There are security risks due to the lack of isolation between containers and the host, which can lead to potential vulnerabilities. Containers directly sharing the host's network can result in port conflicts, especially when multiple containers try to bind to the same port. Furthermore, the setup has limited scalability, making it harder to scale across multiple hosts. Resource contention may arise as containers compete with the host for system resources. Finally, because it is tied to the host’s environment, this mode reduces portability and makes it harder to move containers between different systems.
 
-### Pros of Host Driver in Docker:
-- `Better performance`: Reduced overhead and faster networking.
-- `Simplicity`: No need for port mapping and unified network configuration.
-- `Direct resource access`: Containers can use host resources like storage and hardware.
-- `Less complexity`: Avoids virtual network overhead.
-    
-### Cons of Host Driver in Docker:
-- `Security risks`: Lack of isolation between containers and host.
-- `Port conflicts`: Containers directly share the host’s network, leading to potential port issues.
-- `Limited scalability`: Harder to scale across multiple hosts.
-- `Resource contention`: Containers may compete with host resources.
-- `Less portability`: Tied to the host’s environment, making it harder to move between systems.
+
 
 <br>   
 
@@ -68,7 +57,7 @@ Docker's Bridge driver uses several key concepts to manage container networking 
 ![db01](images/db01.png)
 
  
-One end of the veth pair resides within the container's `network namespace` and acts as the container’s primary network interface (e.g., `eth0`). The other end is connected to the Docker `bridge network` (`defualt docker0`) please note that when user create bridge network its other than `docker0`, which allows the container to communicate with other containers and the host. The veth pair serves as a `virtual cable` connecting the isolated container network to the host’s network stack.
+One end of the veth pair resides within the container's `network namespace` and acts as the container’s primary network interface (e.g., `eth0`). The other end is connected to the Docker `bridge network` (`defualt docker0`) which allows the container to communicate with other containers and the host. The veth pair serves as a `virtual cable` connecting the isolated container network to the host’s network stack.
 
 Each container has its own `network namespace`, which includes its own IP address, routing table, and network interfaces. This isolation ensures that containers do not interfere with each other’s network configurations, maintaining a secure and independent networking environment. The container’s network namespace is connected to the host's network via the Docker bridge (`docker0`) and its veth pair.
 
@@ -77,10 +66,6 @@ When a container sends outbound traffic (e.g., to access the internet), Docker p
 This ensures that the container can access external services while remaining secure behind the host's IP address.
 
 The `bridge network` in Docker connects containers to the host’s network, allowing them to communicate both with each other and with the outside world. The bridge operates at the `data link layer` (Layer 2), forwarding packets based on `MAC addresses`. Containers on the same bridge network can communicate directly with each other by sending packets to the bridge. The bridge also connects to the host’s network interface, enabling containers to access external resources via NAT.
-
-### **Summary**
-
-The veth pair connects the container’s isolated network namespace to the host's bridge, allowing communication with the host and other containers. Each container operates in its own network namespace, isolating its network configuration from the host and other containers. Docker uses **SNAT** for outbound traffic and **DNAT** for inbound traffic, allowing containers to communicate with external networks using the host’s IP address. The Docker bridge network connects containers to each other and the host, facilitating inter-container communication and providing access to the outside world.
 
 ---
 
