@@ -2,7 +2,7 @@
 ---
 ## Table of Contents
 
-- [What is Docker](#what-is-docker)
+- [Introduction to Docker](intro.md)
 - [Docker Engine Installation](#docker-engine-installation)
 - [Docker Desktop Installation](#docker-desktop-installation)
 - [Building a website on Nginx](#building-a-website-on-nginx)
