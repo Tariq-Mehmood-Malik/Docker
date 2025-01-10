@@ -193,7 +193,7 @@ docker compose rm <service-name>
      app:
        image: myapp:latest
        secrets:
-         - my_secret_2  # Referencing the same secret for another service
+         - my_secret_2  # Referencing the secret for another service
    ```   
 
    Secret text file synatax example:   
