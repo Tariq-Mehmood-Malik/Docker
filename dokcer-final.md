@@ -341,7 +341,7 @@ docker stack ps applications
 
 #### 9) We need to create a web container but image can not be downloaded from Docker hub or local
 
-- Building custom image from `Dockerfile`.
+- Craeting `Dockerfile` for custom image.
 
 ```dockerfile                                                                    
 FROM ubuntu:latest
@@ -357,34 +357,42 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-```bash
-docker build -t tariq-dev12:1 .
-```
+- Building and pushing custom image to private diretory (AWS-ECR).
 
 ![05-01](images/final-task/05-01.png)
 <br>
 
-- Creating yaml file for above task to build image and deploy nginx conatiner with 2 replicas
+- Creating yaml file for above task for web conatiner with 2 replicas by pulling image from AWS-ECR.
 
 ```yaml
 version: '3.7'
 
 services:
   web:
-    image: tariq-dev12:1
+    image: 867344459785.dkr.ecr.me-south-1.amazonaws.com/tariq/webserver:latest
+    container_name: tariq_web
     ports:
-      - "8080:80"
+      - 8080:80
     deploy:
       replicas: 2
 ```
 
+- Pulling image from AWS-ECR and creating Docker-stack.
+
 ```bash
-docker stack deploy -c bilut.yaml web-nginx
-docker stack services web-nginx
+docker pull 867344459785.dkr.ecr.me-south-1.amazonaws.com/tariq/webserver:latest
+docker stack deploy -c bilud.yaml web-nginx
+docker stack ps web-nginx
 ```
 
 ![05-02](images/final-task/05-02.png)
 <br>
+
+- Checking conatiner on host.
+
+![05-03](images/final-task/05-03.png)
+<br>
+
 
 #### 10) Install Portainer and deploy any two Application from templates list
 
