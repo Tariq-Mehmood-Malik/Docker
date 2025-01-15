@@ -197,7 +197,7 @@ docker run -d --name cont-03 -p 8083:80 -v /tmp/baz/:/usr/share/nginx/html/:ro n
 
 - I dont know how to code and integrate these 3 applications but i am making docker-compose.yaml with my knowledge to create required 3 containers.
 
-- Creating web imagename `tariq-devops-12:1` from Dockerfile with custome `index.html`.
+- Creating Dockerfile for web conatiner with custome `index.html`.
 
 ```dockerfile                                                                    
 FROM ubuntu:latest
@@ -211,13 +211,6 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-```bash
-docker build -t tariq-devops-12:1 .
-```
-
-![03-01](images/final-task/03-01.png)
-<br>
-
 #### b) mongo db can be run directly  &  c) redis should run on image which is one version below latest
 
 - Creating docker-compose.yaml, using older version of mongo as newer version required `CPU with AVX` which is causing conatiner to crashes.
@@ -226,7 +219,9 @@ docker build -t tariq-devops-12:1 .
 version: '3.7'
 services:
   web:
-    image: tariq-devops-12:1
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: web_tariq
     ports:
       - 8080:80
