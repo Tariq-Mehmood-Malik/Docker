@@ -12,6 +12,7 @@
 - [Docker Swarm](docker-swarm.md)
 - [Docker Stack](docker-stack.md)
 - [Docker Commands all](docker-commands.md)
+- [Docker-Ignore (`.dockerignore`)](dockerignore.md)
 - [Docker Task-1](https://github.com/Tariq-Mehmood-Malik/Docker/blob/main/docker-task1.md)
 - [Docker Task-2](https://github.com/Tariq-Mehmood-Malik/Docker/blob/main/docker-task2.md)
 - [Docker Task-3](https://github.com/Tariq-Mehmood-Malik/Docker/blob/main/dokcer-final.md)
